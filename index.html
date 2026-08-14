@@ -1,86 +1,161 @@
-<!doctype html><html lang='hi'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Yaduwanshi Child Water V6</title><style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fa;color:#17202a}header{background:#087fa8;color:#fff;padding:16px;text-align:center;position:sticky;top:0;z-index:3}h1{margin:0;font-size:21px}.wrap{max-width:1050px;margin:auto;padding:12px}.tabs{display:flex;gap:6px;overflow:auto;margin-bottom:10px}.tabs button{white-space:nowrap}.tab{display:none}.tab.active{display:block}.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.card,.box{background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px #0001;margin-bottom:10px}.num{font-size:23px;font-weight:bold;margin-top:5px}button{border:0;border-radius:9px;padding:10px 13px;background:#087fa8;color:#fff;font-weight:bold;margin:3px;cursor:pointer}.secondary{background:#e7edf0;color:#17202a}.danger{background:#c0392b}.success{background:#238b45}input,select{width:100%;padding:10px;border:1px solid #ccd6dd;border-radius:9px;margin:4px 0 9px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;min-width:700px}th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}.small{font-size:13px;color:#65727b}.pill{display:inline-block;padding:5px 8px;border-radius:20px;background:#e9f4f8}.bill{border:1px dashed #aaa;padding:15px;background:#fff}.right{text-align:right}.locked{opacity:.65}.notice{padding:10px;border-radius:10px;background:#fff8d8;margin:8px 0}.statline{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0}
-</style><link rel="manifest" href="./manifest.json"><meta name="theme-color" content="#087fa8"></head><body>
-<header><h1>💧 Yaduwanshi Child Water</h1><div>RO Water Management • Version 6</div></header>
-<div class="wrap">
-<div class="tabs">
-<button onclick="tab('dash')">🏠 Dashboard</button><button onclick="tab('customers')">👤 Customers</button><button onclick="tab('delivery')">🚚 Delivery</button><button onclick="tab('payment')">💳 Payment</button><button onclick="tab('orders')">🎪 Event Orders</button><button onclick="tab('driver')">🚛 Driver</button><button onclick="tab('monthly')">🧾 Monthly Bill</button><button onclick="tab('monthrecords')">📚 Month Records</button><button onclick="tab('reports')">📊 Reports</button><button onclick="tab('backup')">💾 Backup</button>
-</div>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yaduwanshi Water Software - Version 8</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#1f2937}
+header{background:linear-gradient(135deg,#087fbe,#19a974);color:white;padding:18px;text-align:center}
+header h1{margin:0;font-size:24px}header p{margin:6px 0 0}
+nav{display:flex;gap:6px;overflow:auto;padding:10px;background:white;position:sticky;top:0;z-index:5}
+nav button{border:0;padding:10px 14px;border-radius:8px;background:#e8eef5;white-space:nowrap;cursor:pointer}
+nav button.active{background:#087fbe;color:white}
+main{max-width:1200px;margin:auto;padding:15px}.page{display:none}.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.card{background:white;border-radius:12px;padding:16px;box-shadow:0 2px 8px #00000012}.card b{font-size:25px;display:block;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+input,select{width:100%;padding:10px;border:1px solid #ccd5df;border-radius:7px;margin:5px 0 12px}
+button.primary{background:#087fbe;color:#fff;border:0;padding:10px 14px;border-radius:7px;cursor:pointer}
+button.danger{background:#dc3545;color:white;border:0;padding:7px 10px;border-radius:6px}
+table{width:100%;border-collapse:collapse;background:white;margin-top:12px;font-size:14px}
+th,td{padding:9px;border-bottom:1px solid #e5e7eb;text-align:left}
+th{background:#eef5fa}.box{background:white;padding:16px;border-radius:12px;margin:12px 0;box-shadow:0 2px 8px #00000010}
+h2{margin-top:0}.muted{color:#64748b;font-size:13px}
+.bill{border:2px solid #087fbe;padding:18px;border-radius:10px;background:white;margin-top:15px}
+@media(max-width:600px){header h1{font-size:20px}table{font-size:12px}.card b{font-size:21px}}
+</style>
+</head>
+<body>
+<header><img src="assets/logo.png" alt="Yaduwanshi Child Water Logo" style="width:90px;height:90px;object-fit:contain;border-radius:14px;background:white;padding:3px;margin-bottom:6px"><h1>यदुवंशी चिल्ड वाटर</h1><p>Water Management Software • Version 8</p><p>📱 8516908957 | 📍 Bordehi, Teh. Amla, Dist. Betul</p></header>
 
-<section id="dash" class="tab active">
+<nav id="nav">
+<button class="active" onclick="show('dashboard',this)">🏠 Dashboard</button>
+<button onclick="show('customers',this)">👥 Customer</button>
+<button onclick="show('delivery',this)">🚚 Delivery</button>
+<button onclick="show('payments',this)">💰 Payment</button>
+<button onclick="show('events',this)">🎉 Event</button>
+<button onclick="show('drivers',this)">🧑‍🔧 Driver</button>
+<button onclick="show('driverpay',this)">💵 Driver Collection</button>
+<button onclick="show('billing',this)">🧾 Monthly Bill</button>
+<button onclick="show('reports',this)">📊 Reports</button>
+</nav>
+
+<main>
+<section id="dashboard" class="page active">
+<h2>Dashboard</h2>
 <div class="cards">
-<div class="card">👥 कुल ग्राहक<div class="num" id="nc">0</div></div>
-<div class="card">🚚 आज के Jar<div class="num" id="nj">0</div></div>
-<div class="card">🪣 अब तक गए Jar<div class="num" id="ntotaljar">0</div></div>
-<div class="card">💰 आज की बिक्री<div class="num" id="ns">₹0</div></div>
-<div class="card">💳 आज का Payment<div class="num" id="npay">₹0</div></div>
-<div class="card">🔴 कुल बकाया<div class="num" id="ndue">₹0</div></div>
+<div class="card">Customers<b id="dc">0</b></div><div class="card">Drivers<b id="dd">0</b></div>
+<div class="card">आज के Jar दिए<b id="dj">0</b></div><div class="card">आज की Payment<b id="dp">₹0</b></div>
+<div class="card">Pending Jar<b id="dpend">0</b></div><div class="card">Outstanding<b id="dout">₹0</b></div><div class="card">Driver Collection Today<b id="ddpay">₹0</b></div>
 </div>
-<div class="box"><h3>⚡ Quick Actions</h3>
-<button onclick="tab('customers')">➕ ग्राहक जोड़ें</button><button onclick="tab('delivery')">🚚 Delivery</button><button onclick="tab('payment')">💳 Payment</button><button onclick="tab('orders')">🎪 Event Order</button><button onclick="tab('driver')">🚛 Driver</button><button onclick="tab('reports')">🧾 Reports</button></div>
-<div class="box"><h3>🪣 Jar Summary</h3><div id="stock"></div></div>
+<div class="box"><h3>Version 8 Features</h3><p>Customer-wise pending jar, daily delivery/payment, driver access record, event order, monthly billing और month-wise history.</p></div>
 </section>
 
-<section id="customers" class="tab"><div class="box"><h2>👤 Customer Management</h2>
-<input class="search" id="search" placeholder="नाम या मोबाइल से Search..." oninput="renderCustomers()">
-<div class="row"><div>नाम<input id="name"></div><div>मोबाइल<input id="phone"></div></div><div>पता<input id="address"></div>
-<div class="row"><div>Jar Rate ₹<input id="rate" type="number" value="30"></div><div>Opening Jar<input id="opening" type="number" value="0"></div></div>
-<button onclick="addCustomer()">ग्राहक जोड़ें</button></div>
-<div class="box"><div class="scroll"><table><thead><tr><th>नाम</th><th>मोबाइल</th><th>Jar</th><th>बकाया</th><th>Action</th></tr></thead><tbody id="ct"></tbody></table></div></div></section>
+<section id="customers" class="page">
+<div class="box"><h2>Customer जोड़ें</h2>
+<div class="grid">
+<label>Name<input id="cname"></label><label>Mobile<input id="cmobile"></label><label>Address<input id="caddr"></label>
+<label>Rate / Jar (₹)<input id="crate" type="number" value="20"></label><label>Opening Pending Jar<input id="cjar" type="number" value="0"></label><label>Opening Outstanding (₹)<input id="cout" type="number" value="0"></label>
+</div><button class="primary" onclick="addCustomer()">Customer Save</button></div>
+<div class="box"><h2>Customer List</h2><div id="customerTable"></div></div>
+</section>
 
-<section id="delivery" class="tab"><div class="box"><h2>🚚 Daily Delivery Jar</h2>
-<select id="dc"></select><div class="row"><div>दिए Jar<input id="given" type="number" min="0" value="1"></div><div>वापस Jar<input id="ret" type="number" min="0" value="0"></div></div>
-<div class="row"><div>Rate ₹<input id="drate" type="number" value="30"></div><div>आज Payment ₹<input id="dpay" type="number" value="0"></div></div>
-<label><input id="waAuto" type="checkbox" checked style="width:auto"> Save के बाद WhatsApp message खोलें</label><br>
-<button onclick="saveDelivery()">Delivery Save + WhatsApp</button><button class="secondary" onclick="sendCurrentWhatsApp()">📲 WhatsApp</button>
-<div class="small">Net Jar = दिए − वापस | Bill = दिए × Rate</div></div>
-<div class="box"><h3>आज की Delivery</h3><div class="scroll"><table><thead><tr><th>Customer</th><th>दिए</th><th>वापस</th><th>Net</th><th>Bill</th><th>Payment</th></tr></thead><tbody id="dt"></tbody></table></div></div></section>
+<section id="delivery" class="page">
+<div class="box"><h2>Daily Delivery</h2>
+<div class="grid">
+<label>Date<input id="ddate" type="date"></label><label>Customer<select id="dcustomer"></select></label>
+<label>Driver<select id="ddriver"></select></label><label>Jar दिए<input id="dgiven" type="number" value="1"></label>
+<label>Jar वापस<input id="dreturned" type="number" value="0"></label><label>Payment ₹<input id="dpayment" type="number" value="0"></label>
+</div><button class="primary" onclick="addDelivery()">Delivery Save</button>
+<p class="muted">Pending Jar = पिछला Pending Jar + दिए गए Jar − वापस आए Jar</p></div>
+<div class="box"><div id="deliveryTable"></div></div>
+</section>
 
-<section id="payment" class="tab"><div class="box"><h2>💳 Daily Payment</h2>
-<select id="pc"></select><div class="row"><div>Payment ₹<input id="pay" type="number" min="1"></div><div>Mode<select id="pmode"><option>Cash</option><option>UPI</option><option>Bank</option></select></div></div>
-<button onclick="savePayment()">Payment Save</button></div>
-<div class="box"><h3>आज का Payment Summary</h3><div id="todayPay"></div></div>
-<div class="box"><h3>Customer History</h3><select id="hc" onchange="history()"></select><div id="hist"></div></div></section>
+<section id="payments" class="page">
+<div class="box"><h2>Daily Payment</h2><div class="grid">
+<label>Date<input id="pdate" type="date"></label><label>Customer<select id="pcustomer"></select></label>
+<label>Amount ₹<input id="pamount" type="number"></label><label>Mode<select id="pmode"><option>Cash</option><option>UPI</option><option>Bank</option></select></label>
+</div><button class="primary" onclick="addPayment()">Payment Save</button></div>
+<div class="box"><div id="paymentTable"></div></div>
+</section>
 
-<section id="orders" class="tab"><div class="box"><h2>🎪 Event Order</h2>
-<div class="row"><div>Event / Party Name<input id="eventName" placeholder="जैसे शादी, भंडारा"></div><div>Event Date<input id="eventDate" type="date"></div></div>
-<div class="row"><div>Customer / Contact<input id="eventCustomer" placeholder="नाम / मोबाइल"></div><div>Jar Quantity<input id="eventJar" type="number" min="1" value="10"></div></div>
-<div class="row"><div>Rate ₹<input id="eventRate" type="number" value="30"></div><div>Advance ₹<input id="eventAdvance" type="number" value="0"></div></div>
-<div>Delivery Address<input id="eventAddress"></div>
-<button onclick="saveOrder()">🎪 Event Order Save</button></div>
-<div class="box"><h3>Event Orders</h3><div class="scroll"><table><thead><tr><th>Event</th><th>Date</th><th>Customer</th><th>Jar</th><th>Total</th><th>Advance</th><th>Status</th><th>Action</th></tr></thead><tbody id="ot"></tbody></table></div></div></section>
+<section id="events" class="page">
+<div class="box"><h2>Event Order</h2><div class="grid">
+<label>Event Name<input id="ename"></label><label>Customer<input id="ecustomer"></label><label>Date<input id="edate" type="date"></label>
+<label>Location<input id="elocation"></label><label>Jar<input id="ejar" type="number"></label><label>Rate ₹<input id="erate" type="number"></label>
+<label>Driver<input id="edriver"></label><label>Payment ₹<input id="epay" type="number"></label>
+</div><button class="primary" onclick="addEvent()">Event Save</button></div>
+<div class="box"><div id="eventTable"></div></div>
+</section>
 
-<section id="driver" class="tab"><div class="box"><h2>🚛 Driver Access</h2>
-<div id="driverLock">
-<div class="notice">यह access इसी device पर local है। पहली बार Driver बनाएं।</div>
-<div class="row"><div>Driver Name<input id="driverName"></div><div>4-digit PIN<input id="driverPin" type="password" inputmode="numeric" maxlength="4"></div></div>
-<button onclick="createDriver()">Driver बनाएं</button>
-<hr>
-<input id="loginPin" type="password" inputmode="numeric" maxlength="4" placeholder="Driver PIN">
-<button onclick="driverLogin()">Driver Login</button>
-</div>
-<div id="driverPanel" style="display:none"><div class="pill">🚛 Driver Mode ON</div>
-<h3>आज की Delivery List</h3><div id="driverList"></div>
-<button class="secondary" onclick="driverLogout()">Logout</button></div></section>
+<section id="drivers" class="page">
+<div class="box"><h2>Driver जोड़ें</h2><div class="grid">
+<label>Driver Name<input id="rname"></label><label>Mobile<input id="rmobile"></label>
+</div><button class="primary" onclick="addDriver()">Driver Save</button></div>
+<div class="box"><div id="driverTable"></div></div>
+</section>
 
+<section id="driverpay" class="page">
+<div class="box"><h2>Driver Payment Collection</h2><p class="muted">Driver ने किस तारीख को किस Customer से कितनी payment ली—अलग record.</p>
+<div class="grid">
+<label>Date<input id="dpdate" type="date"></label><label>Driver<select id="dpcdriver"></select></label>
+<label>Customer<select id="dpccustomer"></select></label><label>Area<input id="dpcarea" placeholder="Area / गाँव"></label>
+<label>Amount ₹<input id="dpcamount" type="number"></label><label>Mode<select id="dpcmode"><option>Cash</option><option>UPI</option><option>Bank</option></select></label>
+<label>Remark<input id="dpcremark"></label>
+</div><button class="primary" onclick="addDriverPayment()">Driver Payment Save</button></div>
+<div class="box"><h2>Monthly Driver Collection</h2><div class="grid"><label>Month<input id="dpcmonth" type="month"></label><label>Driver<select id="dpcfilterdriver"></select></label></div><button class="primary" onclick="driverMonthlyReport()">Monthly Report</button><div id="driverMonthlyArea"></div></div>
+<div class="box"><div id="driverPaymentTable"></div></div>
+</section>
 
-<section id="monthly" class="tab"><div class="box"><h2>🧾 Monthly Bill</h2>
-<div class="notice"><b>Yaduwanshi Child Water</b><br>📞 Mo.: 8516908957<br>📍 Add.: Bordehi, Teh. Amla, Dist. Betul</div>
-<div class="row"><div>Customer<select id="mbc"></select></div><div>Month<input id="mbmonth" type="month"></div></div>
-<button onclick="makeMonthlyBill()">बिल बनाएं</button><button onclick="printMonthlyBill()" class="secondary">🖨️ Print / PDF</button><button onclick="whatsappMonthlyBill()" class="success">📲 WhatsApp Bill</button>
-<div id="monthlyBill"></div></div></section>
+<section id="billing" class="page">
+<div class="box"><h2>Monthly Bill</h2><div class="grid">
+<label>Month<input id="bmonth" type="month"></label><label>Customer<select id="bcustomer"></select></label>
+</div><button class="primary" onclick="makeBill()">Bill देखें</button></div>
+<div id="billArea"></div>
+</section>
 
+<section id="reports" class="page">
+<div class="box"><h2>Reports</h2><div class="grid">
+<label>Month<input id="rmonth" type="month"></label>
+</div><button class="primary" onclick="makeReport()">Report देखें</button></div>
+<div id="reportArea"></div>
+</section>
+</main>
 
-<section id="monthrecords" class="tab"><div class="box"><h2>📚 Month-wise Records</h2>
-<div class="row"><div>Year<input id="mrYear" type="number" min="2020" max="2100"></div>
-<div>Month<select id="mrMonth"><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div></div>
-<button onclick="showMonthRecords()">Record देखें</button><button class="secondary" onclick="printMonthRecords()">🖨️ Print</button>
-<div id="monthRecordBox"></div></div></section>
-
-<section id="reports" class="tab"><div class="box"><h2>📊 Reports</h2>
-<div class="row"><div>From<input id="from" type="date"></div><div>To<input id="to" type="date"></div></div>
-<button onclick="report()">Report देखें</button><button onclick="printReport()" class="secondary">🖨️ Print / PDF</button><div id="report"></div></div>
-<div class="box"><h3>🪣 Jar Total</h3><div id="jarReport"></div></div></section>
-
-<section id="backup" class="tab"><div class="box"><h2>💾 Backup & Restore</h2><p class="small">Backup file अपने फोन में सुरक्षित रखें।</p><button onclick="backup()">⬇️ Backup Download</button><input id="restoreFile" type="file" accept=".json" onchange="restore(event)"><button class="danger" onclick="clearData()">सारा Data Delete</button></div></section>
-</div>
+<script>
+const KEY='yw_v8';
+let db=JSON.parse(localStorage.getItem(KEY)||'{"customers":[],"drivers":[],"deliveries":[],"payments":[],"events":[],"driverPayments":[]}'); db.driverPayments=db.driverPayments||[];
+const today=new Date().toISOString().slice(0,10);
+document.querySelectorAll('input[type=date]').forEach(x=>x.value=today);
+document.getElementById('bmonth').value=today.slice(0,7);document.getElementById('rmonth').value=today.slice(0,7);
+function save(){localStorage.setItem(KEY,JSON.stringify(db));render()}
+function show(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');render()}
+function addCustomer(){let n=cname.value.trim();if(!n)return alert('Customer name डालें');db.customers.push({id:Date.now(),name:n,mobile:cmobile.value,address:caddr.value,rate:+crate.value||0,pending:+cjar.value||0,out:+cout.value||0});save();cname.value='';}
+function addDriver(){let n=rname.value.trim();if(!n)return alert('Driver name डालें');db.drivers.push({id:Date.now(),name:n,mobile:rmobile.value});save();rname.value='';}
+function addDelivery(){let c=db.customers.find(x=>x.id==dcustomer.value);if(!c)return alert('Customer चुनें');let g=+dgiven.value||0,r=+dreturned.value||0,p=+dpayment.value||0;c.pending=c.pending+g-r;c.out=Math.max(0,c.out+(g*(c.rate||0))-p);db.deliveries.push({id:Date.now(),date:ddate.value,cid:c.id,driver:ddriver.value,given:g,returned:r,payment:p});save()}
+function addPayment(){let c=db.customers.find(x=>x.id==pcustomer.value);let a=+pamount.value||0;if(!c||!a)return alert('Customer और amount डालें');c.out=Math.max(0,c.out-a);db.payments.push({id:Date.now(),date:pdate.value,cid:c.id,amount:a,mode:pmode.value});save()}
+function addDriverPayment(){let d=db.drivers.find(x=>x.id==dpcdriver.value),c=db.customers.find(x=>x.id==dpccustomer.value),a=+dpcamount.value||0;if(!d||!a)return alert('Driver और amount डालें');db.driverPayments.push({id:Date.now(),date:dpdate.value,driverId:d.id,driver:d.name,cid:c?.id||'',customer:c?.name||'',area:dpcarea.value,amount:a,mode:dpcmode.value,remark:dpcremark.value});save();dpcamount.value='';dpcremark.value='';}
+function driverMonthlyReport(){let m=dpcmonth.value,did=dpcfilterdriver.value,rows=db.driverPayments.filter(x=>x.date.startsWith(m)&&(!did||x.driverId==did));let total=rows.reduce((a,x)=>a+x.amount,0),cash=rows.filter(x=>x.mode==='Cash').reduce((a,x)=>a+x.amount,0),upi=rows.filter(x=>x.mode==='UPI').reduce((a,x)=>a+x.amount,0),bank=rows.filter(x=>x.mode==='Bank').reduce((a,x)=>a+x.amount,0);driverMonthlyArea.innerHTML=`<div class="cards" style="margin-top:12px"><div class="card">Collections<b>${rows.length}</b></div><div class="card">Total<b>₹${total}</b></div><div class="card">Cash<b>₹${cash}</b></div><div class="card">UPI<b>₹${upi}</b></div><div class="card">Bank<b>₹${bank}</b></div></div>`+table(rows.map(x=>[x.date,x.driver,x.customer||'-',x.area||'-','₹'+x.amount,x.mode,x.remark||'']),['Date','Driver','Customer','Area','Amount','Mode','Remark']);}
+function addEvent(){let jar=+ejar.value||0,rate=+erate.value||0;db.events.push({id:Date.now(),name:ename.value,customer:ecustomer.value,date:edate.value,location:elocation.value,jar,rate,driver:edriver.value,payment:+epay.value||0});save()}
+function del(type,id){db[type]=db[type].filter(x=>x.id!=id);save()}
+function opts(id,arr,placeholder='Select'){document.getElementById(id).innerHTML='<option value="">'+placeholder+'</option>'+arr.map(x=>`<option value="${x.id}">${x.name}</option>`).join('')}
+function render(){
+opts('dcustomer',db.customers.map(x=>({id:x.id,name:x.name})));opts('pcustomer',db.customers.map(x=>({id:x.id,name:x.name})));opts('bcustomer',db.customers.map(x=>({id:x.id,name:x.name})));opts('ddriver',db.drivers.map(x=>({id:x.name,name:x.name})));opts('dpcdriver',db.drivers.map(x=>({id:x.id,name:x.name})));opts('dpcfilterdriver',db.drivers.map(x=>({id:x.id,name:x.name})));opts('dpccustomer',db.customers.map(x=>({id:x.id,name:x.name})));
+if(!dpdate.value)dpdate.value=today;if(!dpcmonth.value)dpcmonth.value=today.slice(0,7);
+document.getElementById('dc').textContent=db.customers.length;document.getElementById('dd').textContent=db.drivers.length;
+let td=db.deliveries.filter(x=>x.date===today);document.getElementById('dj').textContent=td.reduce((a,x)=>a+x.given,0);document.getElementById('dp').textContent='₹'+td.reduce((a,x)=>a+x.payment,0);
+document.getElementById('dpend').textContent=db.customers.reduce((a,x)=>a+x.pending,0);document.getElementById('dout').textContent='₹'+db.customers.reduce((a,x)=>a+x.out,0);document.getElementById('ddpay').textContent='₹'+db.driverPayments.filter(x=>x.date===today).reduce((a,x)=>a+x.amount,0);
+customerTable.innerHTML='<table><tr><th>Customer</th><th>Mobile</th><th>Pending Jar</th><th>Outstanding</th><th>Rate</th><th>Action</th></tr>'+db.customers.map(x=>`<tr><td>${x.name}</td><td>${x.mobile||''}</td><td>🫙 ${x.pending}</td><td>₹${x.out}</td><td>₹${x.rate}</td><td><button class="danger" onclick="del('customers',${x.id})">Delete</button></td></tr>`).join('')+'</table>';
+deliveryTable.innerHTML=table(db.deliveries.map(x=>{let c=db.customers.find(c=>c.id==x.cid);return [x.date,c?.name||'',x.driver,x.given,x.returned,x.payment]}),['Date','Customer','Driver','Jar दिए','Jar वापस','Payment']);
+paymentTable.innerHTML=table(db.payments.map(x=>{let c=db.customers.find(c=>c.id==x.cid);return [x.date,c?.name||'',x.amount,x.mode]}),['Date','Customer','Amount','Mode']);
+eventTable.innerHTML=table(db.events.map(x=>[x.date,x.name,x.customer,x.location,x.jar,'₹'+x.rate,x.driver,'₹'+x.payment]),['Date','Event','Customer','Location','Jar','Rate','Driver','Payment']);
+driverTable.innerHTML=table(db.drivers.map(x=>[x.name,x.mobile]),['Driver','Mobile']);
+driverPaymentTable.innerHTML=table(db.driverPayments.slice().reverse().map(x=>[x.date,x.driver,x.customer||'-',x.area||'-','₹'+x.amount,x.mode,x.remark||'']),['Date','Driver','Customer','Area','Amount','Mode','Remark']);
+}
+function table(rows,heads){return '<table><tr>'+heads.map(h=>'<th>'+h+'</th>').join('')+'</tr>'+rows.map(r=>'<tr>'+r.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('')+'</table>'}
+function makeBill(){let c=db.customers.find(x=>x.id==bcustomer.value),m=bmonth.value;if(!c)return alert('Customer चुनें');let ds=db.deliveries.filter(x=>x.cid==c.id&&x.date.startsWith(m));let total=ds.reduce((a,x)=>a+x.given,0),ret=ds.reduce((a,x)=>a+x.returned,0),pay=ds.reduce((a,x)=>a+x.payment,0),amt=total*c.rate;billArea.innerHTML=`<div class="bill"><div style="text-align:center"><img src="assets/logo.png" alt="Yaduwanshi Child Water Logo" style="width:95px;height:95px;object-fit:contain"></div><h2>यदुवंशी चिल्ड वाटर — Monthly Bill</h2><p><b>Customer:</b> ${c.name} &nbsp; <b>Mobile:</b> ${c.mobile||''}</p><p><b>Address:</b> ${c.address||''}</p><hr><p>Month: <b>${m}</b></p><table><tr><th>Total Jar दिए</th><th>Jar वापस</th><th>Net Jar</th><th>Rate</th><th>Bill</th><th>Payment</th></tr><tr><td>${total}</td><td>${ret}</td><td>${total-ret}</td><td>₹${c.rate}</td><td>₹${amt}</td><td>₹${pay}</td></tr></table><h3>Pending Jar: 🫙 ${c.pending}</h3><h3>Current Outstanding: ₹${c.out}</h3><p>📱 8516908957 | 📍 Bordehi, Teh. Amla, Dist. Betul</p></div>`}
+function makeReport(){let m=rmonth.value,ds=db.deliveries.filter(x=>x.date.startsWith(m)),ps=db.payments.filter(x=>x.date.startsWith(m)),es=db.events.filter(x=>x.date.startsWith(m));reportArea.innerHTML=`<div class="box"><h2>${m} Report</h2><div class="cards"><div class="card">Jar दिए<b>${ds.reduce((a,x)=>a+x.given,0)}</b></div><div class="card">Jar वापस<b>${ds.reduce((a,x)=>a+x.returned,0)}</b></div><div class="card">Delivery Payment<b>₹${ds.reduce((a,x)=>a+x.payment,0)}</b></div><div class="card">Payments<b>₹${ps.reduce((a,x)=>a+x.amount,0)}</b></div><div class="card">Events<b>${es.length}</b></div></div></div>`}
+render();
+</script>
+</body></html>
