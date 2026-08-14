@@ -1,23 +1,27 @@
 # Yaduwanshi Water Software V8
 
-GitHub Pages-ready Yaduwanshi Child Water management software.
+GitHub Pages-ready Version 8 of Yaduwanshi Child Water.
 
-## Features
-- Customer management and pending jar
-- Area-wise management
-- Daily delivery and jar return
-- Daily payment
+## Added in V8 upgrade
+- Area management
+- Customer-to-area mapping
+- Daily delivery and jar balance
+- Customer daily payments
 - Driver management
-- **Driver payment collection: date-wise, customer-wise, area-wise, payment mode**
-- **Monthly driver collection report: total, cash, UPI and bank**
+- Driver payment history with date, amount and note
+- Month-wise driver payment filter and total
+- Monthly customer billing
+- Saved month-wise billing records
 - Event orders
-- Monthly billing and month-wise history
-- Outstanding and reports
-- Yaduwanshi Child Water logo
+- Dashboard and monthly reports
+
+## Business
+- Name: Yaduwanshi Child Water
+- Mobile: 8516908957
+- Address: Bordehi, Teh. Amla, Dist. Betul
+
+## Important
+This version stores data in browser localStorage. For multi-device / multi-driver use, a server database and authentication should be added in the next phase.
 
 ## GitHub Pages
-Upload all files to a repository with `index.html` at the root, then enable GitHub Pages from Settings → Pages.
-
-Business: Yaduwanshi Child Water
-Mobile: 8516908957
-Address: Bordehi, Teh. Amla, Dist. Betul
+Upload `index.html` and `README.md` to a GitHub repository and enable GitHub Pages from Settings > Pages > Deploy from branch.
