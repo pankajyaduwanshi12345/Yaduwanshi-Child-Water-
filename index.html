@@ -1,43 +1,136 @@
-<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Yaduwanshi Child Water V3 Updated</title>
-<style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fa;color:#17202a}header{background:#087fa8;color:#fff;padding:16px;text-align:center;position:sticky;top:0;z-index:2}h1{margin:0;font-size:21px}.wrap{max-width:1100px;margin:auto;padding:12px}.tabs{display:flex;gap:6px;overflow:auto;margin-bottom:10px}.tabs button{white-space:nowrap}.tab{display:none}.tab.active{display:block}.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.card,.box{background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px #0001;margin-bottom:10px}.num{font-size:23px;font-weight:bold;margin-top:5px}button{border:0;border-radius:9px;padding:10px 13px;background:#087fa8;color:#fff;font-weight:bold;margin:3px;cursor:pointer}.secondary{background:#e7edf0;color:#17202a}.danger{background:#c0392b}.wa{background:#1aa260}input,select{width:100%;padding:10px;border:1px solid #ccd6dd;border-radius:9px;margin:4px 0 9px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}.small{font-size:13px;color:#65727b}.bill{border:1px solid #087fa8;padding:18px;background:#fff;max-width:760px;margin:auto}.right{text-align:right}.status{font-weight:bold}.actions{white-space:nowrap}@media(max-width:650px){.row{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.bill{padding:12px}}
-@media print{header,.tabs,.no-print{display:none!important}.tab{display:none!important}.tab.printable{display:block!important}.bill{border:0}}
-</style></head><body><header><h1>💧 Yaduwanshi Child Water</h1><div>RO Water Management • Version 3 Updated</div><div>📱 8516908957 | 📍 Bordehi, Teh. Amla, Dist. Betul</div></header><div class="wrap">
-<div class="tabs"><button onclick="tab('dash')">🏠 Dashboard</button><button onclick="tab('customers')">👤 Customers</button><button onclick="tab('delivery')">🚚 Delivery</button><button onclick="tab('payment')">💳 Payment</button><button onclick="tab('billing')">🧾 Monthly Bill</button><button onclick="tab('areas')">🛣️ Area/Route</button><button onclick="tab('reports')">📊 Reports</button><button onclick="tab('backup')">💾 Backup</button></div>
-<section id="dash" class="tab active"><div class="cards"><div class="card">👥 कुल ग्राहक<div class="num" id="nc">0</div></div><div class="card">🚚 आज के Jar<div class="num" id="nj">0</div></div><div class="card">💰 आज की बिक्री<div class="num" id="ns">₹0</div></div><div class="card">🔴 कुल बकाया<div class="num" id="ndue">₹0</div></div></div><div class="box"><h3>⚡ Quick Actions</h3><button onclick="tab('customers')">➕ ग्राहक जोड़ें</button><button onclick="tab('delivery')">🚚 Delivery</button><button onclick="tab('payment')">💳 Payment</button><button onclick="tab('billing')">🧾 Monthly Bill</button></div><div class="box"><h3>🪣 Jar Stock</h3><div id="stock"></div></div></section>
-<section id="customers" class="tab"><div class="box"><h2>👤 Customer Management</h2><input id="search" placeholder="नाम, मोबाइल, Area या Route से Search..." oninput="renderCustomers()"><div class="row"><div>नाम<input id="name"></div><div>मोबाइल<input id="phone" inputmode="tel"></div></div><div>पता<input id="address"></div><div class="row"><div>Area<input id="area" placeholder="जैसे Bordehi"></div><div>Route<input id="route" placeholder="जैसे Route 1"></div></div><div class="row"><div>Jar Rate ₹<input id="rate" type="number" value="30"></div><div>Opening Jar<input id="opening" type="number" value="0"></div></div><button onclick="addCustomer()">ग्राहक जोड़ें</button></div><div class="box"><div class="scroll"><table><thead><tr><th>नाम</th><th>मोबाइल</th><th>Area/Route</th><th>Jar</th><th>बकाया</th><th>WhatsApp</th><th>Action</th></tr></thead><tbody id="ct"></tbody></table></div></div><div class="box"><h3>👤 Customer Details</h3><select id="detailCustomer" onchange="showCustomerDetails()"></select><div id="customerDetails"></div></div></section>
-<section id="delivery" class="tab"><div class="box"><h2>🚚 Daily Delivery</h2><div class="row"><div>Customer<select id="dc"></select></div><div>Date<input id="ddate" type="date"></div></div><div class="row"><div>दिए Jar<input id="given" type="number" min="0" value="1"></div><div>वापस Jar<input id="ret" type="number" min="0" value="0"></div></div><div class="row"><div>Rate ₹<input id="drate" type="number" value="30"></div><div>आज Payment ₹<input id="dpay" type="number" value="0"></div></div><button onclick="saveDelivery()">Delivery Save</button><div class="small">Net Jar = दिए − वापस | Bill = दिए × Rate</div></div><div class="box"><h3>आज की Delivery</h3><div class="scroll"><table><thead><tr><th>Date</th><th>Customer</th><th>Area/Route</th><th>दिए</th><th>वापस</th><th>Bill</th><th>Payment</th><th>WhatsApp</th><th>Edit</th></tr></thead><tbody id="dt"></tbody></table></div></div></section>
-<section id="payment" class="tab"><div class="box"><h2>💳 Payment Entry</h2><select id="pc"></select><div class="row"><div>Payment ₹<input id="pay" type="number" min="1"></div><div>Mode<select id="pmode"><option>Cash</option><option>UPI</option><option>Other</option></select></div></div><button onclick="savePayment()">Payment Save</button></div><div class="box"><h3>Customer History</h3><select id="hc" onchange="history()"></select><div id="hist"></div></div></section>
-<section id="billing" class="tab"><div class="box no-print"><h2>🧾 Professional Monthly Bill</h2><div class="row"><div>Customer<select id="bc" onchange="monthlyBill()"></select></div><div>Month<input id="bmonth" type="month" onchange="monthlyBill()"></div></div><button onclick="monthlyBill()">Bill देखें</button><button class="wa" onclick="sendMonthlyWhatsApp()">📲 WhatsApp Bill</button><button class="secondary" onclick="printBill()">🖨️ Print</button><button class="secondary" onclick="printBill()">📄 Download PDF</button></div><div id="billArea"></div></section>
-<section id="areas" class="tab"><div class="box"><h2>🛣️ Area / Route Wise Customers</h2><div class="row"><div>Area<select id="areaFilter" onchange="renderAreas()"></select></div><div>Route<select id="routeFilter" onchange="renderAreas()"></select></div></div><div id="areaList"></div></div></section>
-<section id="reports" class="tab"><div class="box"><h2>📊 Reports</h2><div class="row"><div>From<input id="from" type="date"></div><div>To<input id="to" type="date"></div></div><button onclick="report()">Report देखें</button><button onclick="printReport()" class="secondary">🖨️ Print / PDF</button><div id="report"></div></div></section>
-<section id="backup" class="tab"><div class="box"><h2>💾 Backup & Restore</h2><p class="small">Backup file अपने फोन में सुरक्षित रखें।</p><button onclick="backup()">⬇️ Backup Download</button><input id="restoreFile" type="file" accept=".json" onchange="restore(event)"><button class="danger" onclick="clearData()">सारा Data Delete</button></div></section>
-</div><script>
-let D=JSON.parse(localStorage.getItem('ycwv3')||'{"customers":[],"deliveries":[],"payments":[]}');
-D.customers=D.customers||[];D.deliveries=D.deliveries||[];D.payments=D.payments||[];D.customers.forEach(c=>{c.area=c.area||'';c.route=c.route||''});D.deliveries.forEach(x=>{x.date=x.date||today();x.payment=+x.payment||0;x.given=+x.given||0;x.returned=+x.returned||0;x.bill=+x.bill||x.given*(x.rate||0)});
-const today=()=>new Date().toISOString().slice(0,10);document.getElementById('ddate').value=today();document.getElementById('bmonth').value=today().slice(0,7);
-function save(){localStorage.setItem('ycwv3',JSON.stringify(D));render()}
-function tab(id){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active')}
-function wa(phone,msg){if(!phone)return alert('Customer mobile number नहीं है');location.href='https://wa.me/91'+phone.replace(/\D/g,'')+'?text='+encodeURIComponent(msg)}
-function customerMsg(c){return `नमस्ते ${c.name}, Yaduwanshi Child Water से संपर्क। धन्यवाद।`}
-function addCustomer(){let n=name.value.trim(),ph=phone.value.trim(),ad=address.value.trim(),r=+rate.value||0,o=+opening.value||0;if(!n||r<=0)return alert('नाम और सही Rate डालें');D.customers.push({id:Date.now()+Math.random(),name:n,phone:ph,address:ad,area:area.value.trim(),route:route.value.trim(),rate:r,jar:o,due:0});['name','phone','address','area','route'].forEach(x=>document.getElementById(x).value='');rate.value=30;opening.value=0;save();alert('✅ ग्राहक जोड़ दिया गया')}
-function selects(){let o='<option value="">ग्राहक चुनें</option>'+D.customers.map(c=>`<option value="${c.id}">${c.name} — ${c.phone||''}</option>`).join('');['dc','pc','hc','bc','detailCustomer'].forEach(id=>document.getElementById(id).innerHTML=o);let areas=[...new Set(D.customers.map(c=>c.area).filter(Boolean))],routes=[...new Set(D.customers.map(c=>c.route).filter(Boolean))];areaFilter.innerHTML='<option value="">सभी Area</option>'+areas.map(x=>`<option>${x}</option>`).join('');routeFilter.innerHTML='<option value="">सभी Route</option>'+routes.map(x=>`<option>${x}</option>`).join('')}
-dc.onchange=()=>{let c=D.customers.find(x=>x.id==dc.value);if(c)drate.value=c.rate}
-function saveDelivery(){let c=D.customers.find(x=>x.id==dc.value),q=+given.value||0,rt=+ret.value||0,r=+drate.value||0,p=+dpay.value||0,date=ddate.value||today();if(!c||q<0||rt<0)return alert('ग्राहक चुनें');let bill=q*r;c.jar+=q-rt;c.due+=bill-p;if(c.due<0)c.due=0;D.deliveries.push({id:Date.now()+Math.random(),date,cid:c.id,name:c.name,given:q,returned:rt,net:q-rt,bill,payment:p,rate:r});save();wa(c.phone,`नमस्ते ${c.name}, आज की Yaduwanshi Child Water delivery: ${q} Jar × ₹${r} = ₹${bill}. धन्यवाद।`);alert('✅ Delivery save हो गई। WhatsApp खुलने पर Send दबाएँ।')}
-function savePayment(){let c=D.customers.find(x=>x.id==pc.value),p=+pay.value||0;if(!c||p<=0)return alert('ग्राहक और Payment डालें');c.due=Math.max(0,c.due-p);D.payments.push({id:Date.now()+Math.random(),date:today(),cid:c.id,name:c.name,amount:p,mode:pmode.value});save();}
-function renderCustomers(){let s=(search.value||'').toLowerCase();ct.innerHTML=D.customers.filter(c=>[c.name,c.phone,c.area,c.route].some(v=>(v||'').toLowerCase().includes(s))).map(c=>`<tr><td>${c.name}</td><td>${c.phone||'-'}</td><td>${c.area||'-'} / ${c.route||'-'}</td><td>${c.jar}</td><td>₹${c.due}</td><td><button class="wa" onclick="wa('${c.phone||''}',customerMsg(${JSON.stringify(c)}))">💬</button></td><td class="actions"><button onclick="editCustomer(${c.id})">✏️ Edit</button><button class="danger" onclick="delCustomer(${c.id})">Delete</button></td></tr>`).join('')}
-function editCustomer(id){let c=D.customers.find(x=>x.id==id);if(!c)return;let n=prompt('नाम',c.name);if(n!==null&&n.trim())c.name=n.trim();let ph=prompt('मोबाइल',c.phone||'');if(ph!==null)c.phone=ph.trim();let ad=prompt('पता',c.address||'');if(ad!==null)c.address=ad;let ar=prompt('Area',c.area||'');if(ar!==null)c.area=ar;let ro=prompt('Route',c.route||'');if(ro!==null)c.route=ro;let r=prompt('Jar Rate',c.rate);if(r!==null&&+r>0)c.rate=+r;save()}
-function delCustomer(id){if(confirm('क्या ग्राहक delete करना है?')){D.customers=D.customers.filter(c=>c.id!=id);save()}}
-function renderDelivery(){let t=ddate.value||today();dt.innerHTML=D.deliveries.filter(x=>x.date==t).map(x=>{let c=D.customers.find(c=>c.id==x.cid);return `<tr><td>${x.date}</td><td>${x.name}</td><td>${c?.area||'-'} / ${c?.route||'-'}</td><td>${x.given}</td><td>${x.returned}</td><td>₹${x.bill}</td><td>₹${x.payment}</td><td><button class="wa" onclick="wa('${c?.phone||''}',\`नमस्ते ${x.name}, आज की delivery ${x.given} Jar, Amount ₹${x.bill}. Yaduwanshi Child Water\`)">💬</button></td><td><button onclick="editDelivery(${x.id})">✏️ Edit</button></td></tr>`}).join('')}
-function editDelivery(id){let x=D.deliveries.find(z=>z.id==id);if(!x)return;let oldC=D.customers.find(c=>c.id==x.cid);if(oldC){oldC.jar-=x.net;oldC.due-=x.bill-x.payment}let q=+prompt('दिए Jar',x.given);if(isNaN(q)){if(oldC){oldC.jar+=x.net;oldC.due+=x.bill-x.payment};return}let rt=+prompt('वापस Jar',x.returned);let r=+prompt('Rate',x.rate||oldC.rate);let p=+prompt('Payment',x.payment);let c=oldC;x.given=q;x.returned=rt;x.rate=r;x.bill=q*r;x.payment=p;x.net=q-rt;c.jar+=x.net;c.due=Math.max(0,c.due+x.bill-p);save();alert('✅ Delivery updated और हिसाब recalculated')}
-function history(){let c=D.customers.find(x=>x.id==hc.value);if(!c){hist.innerHTML='';return}let rows=D.deliveries.filter(x=>x.cid==c.id).slice().reverse().map(x=>`<tr><td>${x.date}</td><td>${x.given}</td><td>${x.returned}</td><td>₹${x.bill}</td><td>₹${x.payment}</td><td><button class="wa" onclick="wa('${c.phone||''}',\`नमस्ते ${c.name}, ${x.date} की delivery ${x.given} Jar, ₹${x.bill}.\`)">💬</button></td></tr>`).join('');hist.innerHTML=`<p>Area: <b>${c.area||'-'}</b> | Route: <b>${c.route||'-'}</b> | Jar: <b>${c.jar}</b> | बकाया: <b>₹${c.due}</b> <button class="wa" onclick="wa('${c.phone||''}',customerMsg(${JSON.stringify(c)}))">💬 WhatsApp</button></p><div class="scroll"><table><tr><th>Date</th><th>दिए</th><th>वापस</th><th>Bill</th><th>Payment</th><th>WhatsApp</th></tr>${rows}</table></div>`}
-function showCustomerDetails(){let c=D.customers.find(x=>x.id==detailCustomer.value);if(!c){customerDetails.innerHTML='';return}let ds=D.deliveries.filter(x=>x.cid==c.id);customerDetails.innerHTML=`<div class="bill"><h3>${c.name}</h3><p>📱 ${c.phone||'-'} | 🛣️ ${c.area||'-'} / ${c.route||'-'}</p><p>${c.address||''}</p><p><b>Jar:</b> ${c.jar} &nbsp; <b>Outstanding:</b> ₹${c.due}</p><button onclick="editCustomer(${c.id})">✏️ Edit Customer</button><button class="wa" onclick="wa('${c.phone||''}',customerMsg(${JSON.stringify(c)}))">💬 WhatsApp</button><h4>Daily Statement</h4><div class="scroll"><table><tr><th>Date</th><th>Jar</th><th>Rate</th><th>Amount</th><th>Payment</th></tr>${ds.slice().reverse().map(x=>`<tr><td>${x.date}</td><td>${x.given}</td><td>₹${x.rate||c.rate}</td><td>₹${x.bill}</td><td>₹${x.payment}</td></tr>`).join('')}</table></div></div>`}
-function monthlyData(c,ym){let ds=D.deliveries.filter(x=>x.cid==c.id&&x.date.startsWith(ym)),ps=D.payments.filter(x=>x.cid==c.id&&x.date.startsWith(ym));let jars=ds.reduce((s,x)=>s+x.given,0),amount=ds.reduce((s,x)=>s+x.bill,0),paym=ds.reduce((s,x)=>s+x.payment,0)+ps.reduce((s,x)=>s+x.amount,0);return {ds,jars,amount,paym}}
-function monthlyBill(){let c=D.customers.find(x=>x.id==bc.value),ym=bmonth.value;if(!c||!ym){billArea.innerHTML='';return}let m=monthlyData(c,ym),prev=D.deliveries.filter(x=>x.cid==c.id&&x.date<ym+'-01').reduce((s,x)=>s+x.bill-x.payment,0)+D.payments.filter(x=>x.cid==c.id&&x.date<ym+'-01').reduce((s,x)=>s-x.amount,0);let final=Math.max(0,prev+m.amount-m.paym);billArea.innerHTML=`<div class="bill printable"><h2 style="text-align:center">💧 YADUWANSHI CHILD WATER</h2><p style="text-align:center">Pure RO Drinking Water<br>📱 8516908957 | Bordehi, Teh. Amla, Dist. Betul</p><hr><div class="row"><div><b>Customer:</b> ${c.name}<br><b>Mobile:</b> ${c.phone||'-'}<br><b>Area/Route:</b> ${c.area||'-'} / ${c.route||'-'}</div><div><b>Billing Month:</b> ${ym}<br><b>Bill Date:</b> ${today()}</div></div><table style="min-width:0;margin-top:15px"><tr><th>Description</th><th>Details</th></tr><tr><td>Total Jar</td><td>${m.jars}</td></tr><tr><td>Rate / Jar</td><td>₹${c.rate}</td></tr><tr><td>Total Amount</td><td>₹${m.amount}</td></tr><tr><td>Previous Balance</td><td>₹${prev}</td></tr><tr><td>Payment Received</td><td>₹${m.paym}</td></tr><tr><th>Final Outstanding</th><th>₹${final}</th></tr></table><p><b>Payment Status:</b> ${final<=0?'PAID':'DUE'}</p><p style="text-align:center">Thank you for choosing Yaduwanshi Child Water.</p></div>`}
-function sendMonthlyWhatsApp(){let c=D.customers.find(x=>x.id==bc.value),ym=bmonth.value;if(!c||!ym)return alert('Customer और Month चुनें');let m=monthlyData(c,ym);let msg=`Yaduwanshi Child Water\nCustomer: ${c.name}\nMonth: ${ym}\nTotal Jar: ${m.jars}\nRate: ₹${c.rate}\nTotal Amount: ₹${m.amount}\nPayment Received: ₹${m.paym}\nOutstanding: ₹${Math.max(0,m.amount-m.paym)}\nधन्यवाद।`;wa(c.phone,msg)}
-function printBill(){if(!billArea.innerHTML)return alert('पहले Bill देखें');window.print()}
-function renderAreas(){let ar=areaFilter.value,ro=routeFilter.value,cs=D.customers.filter(c=>(!ar||c.area==ar)&&(!ro||c.route==ro));areaList.innerHTML=cs.length?`<div class="scroll"><table><tr><th>Customer</th><th>Mobile</th><th>Area</th><th>Route</th><th>Jar</th><th>Outstanding</th><th>WhatsApp</th></tr>${cs.map(c=>`<tr><td>${c.name}</td><td>${c.phone||'-'}</td><td>${c.area||'-'}</td><td>${c.route||'-'}</td><td>${c.jar}</td><td>₹${c.due}</td><td><button class="wa" onclick="wa('${c.phone||''}',customerMsg(${JSON.stringify(c)}))">💬</button></td></tr>`).join('')}</table></div>`:'कोई customer नहीं।'}
-function report(){let f=from.value,t=to.value||f;if(!f)return alert('From date चुनें');let a=D.deliveries.filter(x=>x.date>=f&&x.date<=t),p=D.payments.filter(x=>x.date>=f&&x.date<=t);reportEl.innerHTML=`<div class="bill"><h3>Yaduwanshi Child Water Report</h3><p>${f} से ${t}</p><p>कुल Delivery: <b>${a.reduce((s,x)=>s+x.given,0)} Jar</b></p><p>कुल बिक्री: <b>₹${a.reduce((s,x)=>s+x.bill,0)}</b></p><p>Delivery Payment: <b>₹${a.reduce((s,x)=>s+x.payment,0)}</b></p><p>Other Payment: <b>₹${p.reduce((s,x)=>s+x.amount,0)}</b></p><p>वर्तमान कुल बकाया: <b>₹${D.customers.reduce((s,x)=>s+x.due,0)}</b></p></div>`}const reportEl=document.getElementById('report');function printReport(){window.print()}
-function backup(){let b=new Blob([JSON.stringify(D,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='yaduwanshi-water-backup-'+today()+'.json';a.click()}function restore(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{D=JSON.parse(r.result);save();alert('✅ Backup restore हो गया')}catch{alert('Backup file सही नहीं है')}};r.readAsText(f)}function clearData(){if(confirm('सारा data delete होगा। पक्का?')){localStorage.removeItem('ycwv3');D={customers:[],deliveries:[],payments:[]};render()}}
-function render(){selects();renderCustomers();renderDelivery();renderAreas();showCustomerDetails();let t=today(),a=D.deliveries.filter(x=>x.date==t),sales=a.reduce((s,x)=>s+x.bill,0);nc.textContent=D.customers.length;nj.textContent=a.reduce((s,x)=>s+x.given,0);ns.textContent='₹'+sales;ndue.textContent='₹'+D.customers.reduce((s,x)=>s+x.due,0);stock.innerHTML=`Customer के पास Jar: <b>${D.customers.reduce((s,x)=>s+x.jar,0)}</b>`}
-render();
-</script></body></html>
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yaduwanshi Child Water - Version 3</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:#f4f7fb;color:#172033}
+.app{display:flex;min-height:100vh}.side{width:235px;background:#062b50;color:#fff;padding:14px 10px}.brand{text-align:center;font-weight:700;font-size:18px;padding:16px 4px 22px}.nav{padding:11px 13px;margin:4px 0;border-radius:9px;cursor:pointer}.nav:hover,.nav.active{background:#1677ed}
+.main{flex:1;padding:20px;overflow:auto}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.top h1{margin:0;color:#06469c;font-size:24px}
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.card,.panel{background:#fff;border-radius:13px;padding:17px;box-shadow:0 2px 10px #0000000c}.label{color:#697386;font-size:13px}.value{font-size:24px;font-weight:700;margin-top:7px}
+.grid{display:grid;grid-template-columns:2fr 1.2fr 1.2fr;gap:12px;margin-top:14px}.panel h2{font-size:18px;margin:0 0 13px}.row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #edf0f4}.muted{color:#697386}
+.quick{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}.btn{border:1px solid #e1e7ef;background:#fff;border-radius:9px;padding:12px 7px;cursor:pointer}.btn:hover{background:#eef6ff}
+input,select{padding:10px;border:1px solid #cbd5e1;border-radius:8px;width:100%}.primary{background:#1677ed;color:white;border:0;padding:10px 16px;border-radius:8px;cursor:pointer}.danger{background:#dc3545;color:#fff;border:0;padding:7px 10px;border-radius:7px;cursor:pointer}.success{background:#16834b;color:#fff;border:0;padding:7px 10px;border-radius:7px;cursor:pointer}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:15px}.modal.show{display:flex}.box{background:#fff;width:min(720px,96vw);max-height:92vh;overflow:auto;border-radius:14px;padding:20px}.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}
+.qty{display:flex;align-items:center;gap:7px}.qty button{width:36px;height:36px;border:0;border-radius:8px;background:#eaf2ff;font-size:20px;cursor:pointer}.qty input{width:65px;text-align:center}
+.actions{display:flex;gap:7px;flex-wrap:wrap}.bill{border:1px solid #ddd;padding:18px;border-radius:10px}.bill h2{text-align:center}.small{font-size:12px}
+.toast{position:fixed;right:15px;bottom:15px;background:#132238;color:#fff;padding:11px 15px;border-radius:8px;display:none}.toast.show{display:block}
+@media(max-width:950px){.side{width:72px}.brand{font-size:10px}.nav{font-size:0;text-align:center}.cards{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.quick{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.side{display:none}.main{padding:11px}.cards{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+<div class="brand">💧<br>YADUWANSHI<br>CHILD WATER</div>
+<div class="nav active">🏠 Dashboard</div>
+<div class="nav" onclick="openCustomer()">👥 ग्राहक</div>
+<div class="nav" onclick="openDelivery()">🚚 डेली डिलीवरी</div>
+<div class="nav" onclick="openMonthly()">🗓️ मंथली कार्ड</div>
+<div class="nav" onclick="openBill()">🧾 मंथली बिल</div>
+<div class="nav" onclick="openPayment()">₹ पेमेंट</div>
+<div class="nav">🚗 ड्राइवर</div><div class="nav">🎉 इवेंट ऑर्डर</div><div class="nav">📊 रिपोर्ट्स</div><div class="nav">🫙 जार स्टॉक</div>
+</aside>
+<main class="main">
+<div class="top"><h1>Yaduwanshi Child Water</h1><div>📅 <b id="today"></b> &nbsp; 👤 Admin</div></div>
+<section class="cards">
+<div class="card"><div class="label">कुल ग्राहक</div><div class="value" id="customerCount">0</div></div>
+<div class="card"><div class="label">आज की डिलीवरी</div><div class="value" id="todayJars">0</div></div>
+<div class="card"><div class="label">आज का कलेक्शन</div><div class="value">₹ <span id="todayCollection">0</span></div></div>
+<div class="card"><div class="label">कुल बकाया</div><div class="value">₹ <span id="totalDue">0</span></div></div>
+<div class="card"><div class="label">जार स्टॉक</div><div class="value" id="stock">0</div></div>
+</section>
+<section class="grid">
+<div class="panel"><h2>डिलीवरी सारांश (आज)</h2><div class="row"><span>कुल डिलीवरी</span><b id="sumJars">0 जार</b></div><div class="row"><span>Daily WhatsApp ON ग्राहक</span><b id="waCount">0</b></div><div class="muted" style="margin-top:12px">Daily WhatsApp update delivery save करते समय उपलब्ध होगा।</div></div>
+<div class="panel"><h2>कलेक्शन सारांश</h2><div class="row"><span>आज</span><b>₹ <span id="c2">0</span></b></div><div class="row"><span>कुल Payment</span><b>₹ <span id="allPaid">0</span></b></div></div>
+<div class="panel"><h2>बकाया सारांश</h2><div class="row"><span>कुल बकाया</span><b>₹ <span id="d2">0</span></b></div><div class="row"><span>Customers</span><b id="dueCustomers">0</b></div></div>
+</section>
+<section class="panel" style="margin-top:14px"><h2>त्वरित शॉर्टकट</h2><div class="quick">
+<button class="btn" onclick="openCustomer()">👤➕<br>ग्राहक जोड़ें</button><button class="btn" onclick="openDelivery()">🚚<br>डेली एंट्री</button><button class="btn" onclick="openMonthly()">🗓️<br>मंथली कार्ड</button><button class="btn" onclick="openBill()">🧾<br>मंथली बिल</button><button class="btn" onclick="openPayment()">₹<br>पेमेंट</button><button class="btn" onclick="renderCustomers()">👥<br>ग्राहक सूची</button>
+</div></section>
+<section class="panel" style="margin-top:14px"><h2>ग्राहक खोजें</h2><input placeholder="नाम / मोबाइल / एरिया से खोजें..." oninput="searchCustomers(this.value)"><div id="customerList" style="margin-top:10px"></div></section>
+</main></div>
+
+<div class="modal" id="modal"><div class="box" id="modalBox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY="yw_v3_full"; let db=JSON.parse(localStorage.getItem(KEY)||'{"customers":[],"entries":[],"payments":[]}');
+const save=()=>localStorage.setItem(KEY,JSON.stringify(db));
+const today=()=>new Date().toISOString().slice(0,10);
+document.getElementById("today").textContent=new Date().toLocaleDateString("hi-IN");
+function modal(html){document.getElementById("modalBox").innerHTML=html;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1800)}
+function openCustomer(){
+modal(`<h2>➕ नया ग्राहक</h2><div class="form">
+<input id="cn" placeholder="ग्राहक का नाम *"><input id="cp" placeholder="मोबाइल नंबर (अनिवार्य नहीं)">
+<input id="ca" class="full" placeholder="पता"><input id="cr" placeholder="Area / Route"><input id="rate" type="number" value="20" placeholder="Jar Rate">
+<label class="full"><input id="dwa" type="checkbox"> Daily WhatsApp Update चाहिए</label></div><br>
+<button class="primary" onclick="saveCustomer()">Save Customer</button> <button onclick="closeModal()">Cancel</button>`)
+}
+function saveCustomer(){
+let name=cn.value.trim(); if(!name)return alert("ग्राहक का नाम डालें");
+db.customers.push({id:Date.now(),name,phone:cp.value.trim(),address:ca.value.trim(),area:cr.value.trim(),rate:+rate.value||0,dailyWA:dwa.checked});
+save();closeModal();refresh();toast("Customer added");
+}
+function renderCustomers(arr=db.customers){
+let el=document.getElementById("customerList");
+if(!arr.length){el.innerHTML='<span class="muted">कोई ग्राहक नहीं है।</span>';return}
+el.innerHTML=arr.map(c=>`<div class="row"><span><b>${c.name}</b><br><span class="small">${c.phone||"Mobile नहीं"} · ${c.area||"Area नहीं"} · Rate ₹${c.rate}</span></span><span class="actions"><button class="btn" onclick="openDelivery(${c.id})">Entry</button><button class="btn" onclick="openMonthly(${c.id})">Card</button><button class="btn" onclick="openBill(${c.id})">Bill</button></span></div>`).join("");
+}
+function searchCustomers(q){q=q.toLowerCase();renderCustomers(db.customers.filter(c=>(c.name+" "+c.phone+" "+c.area).toLowerCase().includes(q)))}
+function customerSelect(selected=""){return `<select id="sel" onchange="onSelectCustomer()"><option value="">Customer चुनें</option>${db.customers.map(c=>`<option value="${c.id}" ${String(c.id)==String(selected)?"selected":""}>${c.name}${c.phone?" - "+c.phone:""}</option>`).join("")}</select>`}
+function onSelectCustomer(){}
+function openDelivery(id=""){
+modal(`<h2>🚚 Daily Delivery Entry</h2>${customerSelect(id)}<div id="entryArea" style="margin-top:12px"></div><br><button class="primary" onclick="saveEntry()">Save Entry</button> <button onclick="closeModal()">Cancel</button>`);
+document.getElementById("sel").onchange=()=>showEntry();
+showEntry();
+}
+function showEntry(){
+let c=db.customers.find(x=>x.id==sel.value);document.getElementById("entryArea").innerHTML=c?`<div class="qty"><button onclick="chg(-1)">−</button><input id="qty" type="number" value="1" min="0"><button onclick="chg(1)">+</button><span>Jar</span></div><p>Rate: ₹${c.rate} | Amount: ₹<span id="amt">${c.rate}</span></p><label><input id="sendDaily" type="checkbox" ${c.dailyWA?"checked":""}> Daily WhatsApp update</label>`:'<span class="muted">Customer चुनें।</span>';
+if(c)qty.oninput=()=>amt.textContent=(+qty.value||0)*c.rate;
+}
+function chg(n){qty.value=Math.max(0,(+qty.value||0)+n);qty.oninput()}
+function saveEntry(){
+let c=db.customers.find(x=>x.id==sel.value);if(!c)return alert("Customer चुनें");let q=+qty.value||0;if(q<1)return alert("Jar quantity डालें");
+let e={id:Date.now(),customerId:c.id,date:today(),qty:q,rate:c.rate,amount:q*c.rate};db.entries.push(e);save();let send=document.getElementById("sendDaily").checked;
+closeModal();refresh();toast("Delivery saved");
+if(send && c.phone) whatsapp(c.phone,`नमस्ते ${c.name}, आज आपकी डिलीवरी ${q} जार की हुई। कुल राशि ₹${e.amount}। धन्यवाद - Yaduwanshi Child Water`);
+else if(send && !c.phone) alert("इस customer का mobile number उपलब्ध नहीं है।");
+}
+function month(){return new Date().toISOString().slice(0,7)}
+function customerTotals(c,mo=month()){
+let es=db.entries.filter(e=>e.customerId===c.id&&e.date.startsWith(mo));let paid=db.payments.filter(p=>p.customerId===c.id&&p.date.startsWith(mo)).reduce((a,p)=>a+p.amount,0);let jars=es.reduce((a,e)=>a+e.qty,0),amt=es.reduce((a,e)=>a+e.amount,0);return {es,paid,jars,amt,due:Math.max(0,amt-paid)}
+}
+function openMonthly(id=""){
+modal(`<h2>🗓️ Customer Monthly Card</h2>${customerSelect(id)}<div id="monthArea" style="margin-top:12px"></div><br><button onclick="closeModal()">Close</button>`);
+sel.onchange=showMonthly;showMonthly();
+}
+function showMonthly(){
+let c=db.customers.find(x=>x.id==sel.value);if(!c){monthArea.innerHTML='<span class="muted">Customer चुनें।</span>';return}
+let t=customerTotals(c);monthArea.innerHTML=`<div class="row"><span>Month</span><b>${month()}</b></div><div class="row"><span>Total Jars</span><b>${t.jars}</b></div><div class="row"><span>Total Amount</span><b>₹${t.amt}</b></div><div class="row"><span>Paid</span><b>₹${t.paid}</b></div><div class="row"><span>Outstanding</span><b>₹${t.due}</b></div><h3>तारीखवार Consumption</h3>${t.es.length?t.es.map(e=>`<div class="row"><span>${e.date}</span><span class="qty"><button onclick="adjustEntry(${e.id},-1)">−</button><b>${e.qty}</b><button onclick="adjustEntry(${e.id},1)">+</button></span></div>`).join(""):"कोई entry नहीं"}<br><button class="success" onclick="openBill(${c.id})">Monthly Bill</button>`;
+}
+function adjustEntry(id,n){let e=db.entries.find(x=>x.id===id);if(!e)return;e.qty=Math.max(0,e.qty+n);e.amount=e.qty*e.rate;if(e.qty===0)db.entries=db.entries.filter(x=>x.id!==id);save();showMonthly();refresh()}
+function openBill(id=""){
+modal(`<h2>🧾 Monthly Bill</h2>${customerSelect(id)}<div id="billArea" style="margin-top:12px"></div><br><button onclick="closeModal()">Close</button>`);
+sel.onchange=showBill;showBill();
+}
+function showBill(){
+let c=db.customers.find(x=>x.id==sel.value);if(!c){billArea.innerHTML='<span class="muted">Customer चुनें।</span>';return}
+let t=customerTotals(c);billArea.innerHTML=`<div class="bill" id="printBill"><h2>Yaduwanshi Child Water</h2><p><b>Customer:</b> ${c.name}</p><p><b>Month:</b> ${month()}</p><p><b>Total Jars:</b> ${t.jars}</p><p><b>Rate:</b> ₹${c.rate}</p><p><b>Total Amount:</b> ₹${t.amt}</p><p><b>Paid:</b> ₹${t.paid}</p><p><b>Outstanding:</b> ₹${t.due}</p></div><br><div class="actions"><button class="primary" onclick="printBill()">Print / PDF</button><button class="success" onclick="sendBill(${c.id})">WhatsApp Bill</button></div>`;
+}
+function sendBill(id){let c=db.customers.find(x=>x.id==id),t=customerTotals(c);if(!c.phone)return alert("इस customer का mobile number उपलब्ध नहीं है।");whatsapp(c.phone,`Yaduwanshi Child Water - Monthly Bill%0ACustomer: ${c.name}%0AMonth: ${month()}%0ATotal Jars: ${t.jars}%0ARate: ₹${c.rate}%0ATotal Amount: ₹${t.amt}%0APaid: ₹${t.paid}%0AOutstanding: ₹${t.due}`)}
+function whatsapp(phone,msg){let p=phone.replace(/\D/g,"");if(p.length===10)p="91"+p;window.open("https://wa.me/"+p+"?text="+encodeURIComponent(msg),"_blank")}
+function printBill(){let w=window.open("","_blank");w.document.write("<html><head><title>Monthly Bill</title></head><body>"+document.getElementById("printBill").outerHTML+"<script>window.print()<\/script></body></html>");w.document.close()}
+function openPayment(){
+modal(`<h2>₹ Payment Entry</h2>${customerSelect()}<div class="form" style="margin-top:12px"><input id="pay" type="number" placeholder="Payment Amount"><input id="pdate" type="date" value="${today()}"></div><br><button class="primary" onclick="savePayment()">Save Payment</button> <button onclick="closeModal()">Cancel</button>`)
+}
+function savePayment(){let c=db.customers.find(x=>x.id==sel.value),a=+pay.value||0;if(!c||a<=0)return alert("Customer और amount डालें");db.payments.push({id:Date.now(),customerId:c.id,amount:a,date:pdate.value});save();closeModal();refresh();toast("Payment saved")}
+function refresh(){
+let tj=db.entries.filter(e=>e.date===today()).reduce((a,e)=>a+e.qty,0),tc=db.payments.filter(p=>p.date===today()).reduce((a,p)=>a+p.amount,0),paid=db.payments.reduce((a,p)=>a+p.amount,0);
+let due=db.customers.reduce((a,c)=>a+customerTotals(c).due,0);
+customerCount.textContent=db.customers.length;todayJars.textContent=tj;sumJars.textContent=tj+" जार";todayCollection.textContent=tc;c2.textContent=tc;allPaid.textContent=paid;totalDue.textContent=due;d2.textContent=due;dueCustomers.textContent=db.customers.filter(c=>customerTotals(c).due>0).length;waCount.textContent=db.customers.filter(c=>c.dailyWA).length;stock.textContent="—";renderCustomers();
+}
+refresh();
+</script>
+</body></html>
