@@ -1,136 +1,1565 @@
 <!doctype html>
 <html lang="hi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Yaduwanshi Child Water - Version 3</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:#f4f7fb;color:#172033}
-.app{display:flex;min-height:100vh}.side{width:235px;background:#062b50;color:#fff;padding:14px 10px}.brand{text-align:center;font-weight:700;font-size:18px;padding:16px 4px 22px}.nav{padding:11px 13px;margin:4px 0;border-radius:9px;cursor:pointer}.nav:hover,.nav.active{background:#1677ed}
-.main{flex:1;padding:20px;overflow:auto}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.top h1{margin:0;color:#06469c;font-size:24px}
-.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.card,.panel{background:#fff;border-radius:13px;padding:17px;box-shadow:0 2px 10px #0000000c}.label{color:#697386;font-size:13px}.value{font-size:24px;font-weight:700;margin-top:7px}
-.grid{display:grid;grid-template-columns:2fr 1.2fr 1.2fr;gap:12px;margin-top:14px}.panel h2{font-size:18px;margin:0 0 13px}.row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #edf0f4}.muted{color:#697386}
-.quick{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}.btn{border:1px solid #e1e7ef;background:#fff;border-radius:9px;padding:12px 7px;cursor:pointer}.btn:hover{background:#eef6ff}
-input,select{padding:10px;border:1px solid #cbd5e1;border-radius:8px;width:100%}.primary{background:#1677ed;color:white;border:0;padding:10px 16px;border-radius:8px;cursor:pointer}.danger{background:#dc3545;color:#fff;border:0;padding:7px 10px;border-radius:7px;cursor:pointer}.success{background:#16834b;color:#fff;border:0;padding:7px 10px;border-radius:7px;cursor:pointer}
-.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:15px}.modal.show{display:flex}.box{background:#fff;width:min(720px,96vw);max-height:92vh;overflow:auto;border-radius:14px;padding:20px}.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}
-.qty{display:flex;align-items:center;gap:7px}.qty button{width:36px;height:36px;border:0;border-radius:8px;background:#eaf2ff;font-size:20px;cursor:pointer}.qty input{width:65px;text-align:center}
-.actions{display:flex;gap:7px;flex-wrap:wrap}.bill{border:1px solid #ddd;padding:18px;border-radius:10px}.bill h2{text-align:center}.small{font-size:12px}
-.toast{position:fixed;right:15px;bottom:15px;background:#132238;color:#fff;padding:11px 15px;border-radius:8px;display:none}.toast.show{display:block}
-@media(max-width:950px){.side{width:72px}.brand{font-size:10px}.nav{font-size:0;text-align:center}.cards{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.quick{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.side{display:none}.main{padding:11px}.cards{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:1fr}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:#f4f7fb;color:#172033}
+.app{display:flex;min-height:100vh}
+.side{width:235px;background:#062b50;color:#fff;padding:14px 10px}
+.brand{text-align:center;font-weight:700;font-size:18px;padding:16px 4px 22px}
+.nav{padding:11px 13px;margin:4px 0;border-radius:9px;cursor:pointer}
+.nav:hover,.nav.active{background:#1677ed}
+
+.main{flex:1;padding:20px;overflow:auto}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.top h1{margin:0;color:#06469c;font-size:24px}
+
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.card,.panel{background:#fff;border-radius:13px;padding:17px;box-shadow:0 2px 10px #0000000c}
+.label{color:#697386;font-size:13px}
+.value{font-size:24px;font-weight:700;margin-top:7px}
+
+.grid{display:grid;grid-template-columns:2fr 1.2fr 1.2fr;gap:12px;margin-top:14px}
+.panel h2{font-size:18px;margin:0 0 13px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #edf0f4}
+.muted{color:#697386}
+
+.quick{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}
+.btn{border:1px solid #e1e7ef;background:#fff;border-radius:9px;padding:12px 7px;cursor:pointer}
+.btn:hover{background:#eef6ff}
+
+input,select{
+padding:10px;
+border:1px solid #cbd5e1;
+border-radius:8px;
+width:100%
+}
+
+.primary{
+background:#1677ed;
+color:white;
+border:0;
+padding:10px 16px;
+border-radius:8px;
+cursor:pointer
+}
+
+.success{
+background:#16834b;
+color:#fff;
+border:0;
+padding:7px 10px;
+border-radius:7px;
+cursor:pointer
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:#0008;
+display:none;
+align-items:center;
+justify-content:center;
+padding:15px
+}
+
+.modal.show{display:flex}
+
+.box{
+background:#fff;
+width:min(720px,96vw);
+max-height:92vh;
+overflow:auto;
+border-radius:14px;
+padding:20px
+}
+
+.form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.full{grid-column:1/-1}
+
+.qty{
+display:flex;
+align-items:center;
+gap:7px
+}
+
+.qty button{
+width:36px;
+height:36px;
+border:0;
+border-radius:8px;
+background:#eaf2ff;
+font-size:20px;
+cursor:pointer
+}
+
+.qty input{
+width:65px;
+text-align:center
+}
+
+.actions{
+display:flex;
+gap:7px;
+flex-wrap:wrap
+}
+
+.bill{
+border:1px solid #ddd;
+padding:18px;
+border-radius:10px
+}
+
+.bill h2{text-align:center}
+.small{font-size:12px}
+
+.toast{
+position:fixed;
+right:15px;
+bottom:15px;
+background:#132238;
+color:#fff;
+padding:11px 15px;
+border-radius:8px;
+display:none
+}
+
+.toast.show{display:block}
+
+@media(max-width:950px){
+.side{width:72px}
+.brand{font-size:10px}
+.nav{font-size:0;text-align:center}
+.cards{grid-template-columns:repeat(2,1fr)}
+.grid{grid-template-columns:1fr}
+.quick{grid-template-columns:repeat(3,1fr)}
+}
+
+@media(max-width:560px){
+.side{display:none}
+.main{padding:11px}
+.cards{grid-template-columns:1fr}
+.quick{grid-template-columns:repeat(2,1fr)}
+.form{grid-template-columns:1fr}
+}
 </style>
 </head>
-<body>
-<div class="app">
-<aside class="side">
-<div class="brand">💧<br>YADUWANSHI<br>CHILD WATER</div>
-<div class="nav active">🏠 Dashboard</div>
-<div class="nav" onclick="openCustomer()">👥 ग्राहक</div>
-<div class="nav" onclick="openDelivery()">🚚 डेली डिलीवरी</div>
-<div class="nav" onclick="openMonthly()">🗓️ मंथली कार्ड</div>
-<div class="nav" onclick="openBill()">🧾 मंथली बिल</div>
-<div class="nav" onclick="openPayment()">₹ पेमेंट</div>
-<div class="nav">🚗 ड्राइवर</div><div class="nav">🎉 इवेंट ऑर्डर</div><div class="nav">📊 रिपोर्ट्स</div><div class="nav">🫙 जार स्टॉक</div>
-</aside>
-<main class="main">
-<div class="top"><h1>Yaduwanshi Child Water</h1><div>📅 <b id="today"></b> &nbsp; 👤 Admin</div></div>
-<section class="cards">
-<div class="card"><div class="label">कुल ग्राहक</div><div class="value" id="customerCount">0</div></div>
-<div class="card"><div class="label">आज की डिलीवरी</div><div class="value" id="todayJars">0</div></div>
-<div class="card"><div class="label">आज का कलेक्शन</div><div class="value">₹ <span id="todayCollection">0</span></div></div>
-<div class="card"><div class="label">कुल बकाया</div><div class="value">₹ <span id="totalDue">0</span></div></div>
-<div class="card"><div class="label">जार स्टॉक</div><div class="value" id="stock">0</div></div>
-</section>
-<section class="grid">
-<div class="panel"><h2>डिलीवरी सारांश (आज)</h2><div class="row"><span>कुल डिलीवरी</span><b id="sumJars">0 जार</b></div><div class="row"><span>Daily WhatsApp ON ग्राहक</span><b id="waCount">0</b></div><div class="muted" style="margin-top:12px">Daily WhatsApp update delivery save करते समय उपलब्ध होगा।</div></div>
-<div class="panel"><h2>कलेक्शन सारांश</h2><div class="row"><span>आज</span><b>₹ <span id="c2">0</span></b></div><div class="row"><span>कुल Payment</span><b>₹ <span id="allPaid">0</span></b></div></div>
-<div class="panel"><h2>बकाया सारांश</h2><div class="row"><span>कुल बकाया</span><b>₹ <span id="d2">0</span></b></div><div class="row"><span>Customers</span><b id="dueCustomers">0</b></div></div>
-</section>
-<section class="panel" style="margin-top:14px"><h2>त्वरित शॉर्टकट</h2><div class="quick">
-<button class="btn" onclick="openCustomer()">👤➕<br>ग्राहक जोड़ें</button><button class="btn" onclick="openDelivery()">🚚<br>डेली एंट्री</button><button class="btn" onclick="openMonthly()">🗓️<br>मंथली कार्ड</button><button class="btn" onclick="openBill()">🧾<br>मंथली बिल</button><button class="btn" onclick="openPayment()">₹<br>पेमेंट</button><button class="btn" onclick="renderCustomers()">👥<br>ग्राहक सूची</button>
-</div></section>
-<section class="panel" style="margin-top:14px"><h2>ग्राहक खोजें</h2><input placeholder="नाम / मोबाइल / एरिया से खोजें..." oninput="searchCustomers(this.value)"><div id="customerList" style="margin-top:10px"></div></section>
-</main></div>
 
-<div class="modal" id="modal"><div class="box" id="modalBox"></div></div>
+<body>
+
+<div class="app">
+
+<aside class="side">
+
+<div class="brand">
+💧<br>
+YADUWANSHI<br>
+CHILD WATER
+</div>
+
+<div class="nav active">🏠 Dashboard</div>
+
+<div class="nav" onclick="openCustomer()">
+👥 ग्राहक
+</div>
+
+<div class="nav" onclick="openDelivery()">
+🚚 डेली डिलीवरी
+</div>
+
+<div class="nav" onclick="openMonthly()">
+🗓️ मंथली कार्ड
+</div>
+
+<div class="nav" onclick="openBill()">
+🧾 मंथली बिल
+</div>
+
+<div class="nav" onclick="openPayment()">
+₹ पेमेंट
+</div>
+
+<div class="nav">🚗 ड्राइवर</div>
+
+<div class="nav">🎉 इवेंट ऑर्डर</div>
+
+<div class="nav">📊 रिपोर्ट्स</div>
+
+<div class="nav">🫙 जार स्टॉक</div>
+
+</aside>
+
+
+<main class="main">
+
+<div class="top">
+
+<h1>Yaduwanshi Child Water</h1>
+
+<div>
+📅 <b id="today"></b>
+&nbsp; 👤 Admin
+</div>
+
+</div>
+
+
+<section class="cards">
+
+<div class="card">
+<div class="label">कुल ग्राहक</div>
+<div class="value" id="customerCount">0</div>
+</div>
+
+<div class="card">
+<div class="label">आज की डिलीवरी</div>
+<div class="value" id="todayJars">0</div>
+</div>
+
+<div class="card">
+<div class="label">आज का कलेक्शन</div>
+<div class="value">
+₹ <span id="todayCollection">0</span>
+</div>
+</div>
+
+<div class="card">
+<div class="label">कुल बकाया</div>
+<div class="value">
+₹ <span id="totalDue">0</span>
+</div>
+</div>
+
+<div class="card">
+<div class="label">जार स्टॉक</div>
+<div class="value" id="stock">0</div>
+</div>
+
+</section>
+
+
+<section class="grid">
+
+<div class="panel">
+
+<h2>डिलीवरी सारांश (आज)</h2>
+
+<div class="row">
+<span>कुल डिलीवरी</span>
+<b id="sumJars">0 जार</b>
+</div>
+
+<div class="row">
+<span>Daily WhatsApp ON ग्राहक</span>
+<b id="waCount">0</b>
+</div>
+
+<div class="muted" style="margin-top:12px">
+Daily WhatsApp update delivery save करते समय उपलब्ध होगा।
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>कलेक्शन सारांश</h2>
+
+<div class="row">
+<span>आज</span>
+<b>₹ <span id="c2">0</span></b>
+</div>
+
+<div class="row">
+<span>कुल Payment</span>
+<b>₹ <span id="allPaid">0</span></b>
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>बकाया सारांश</h2>
+
+<div class="row">
+<span>कुल बकाया</span>
+<b>₹ <span id="d2">0</span></b>
+</div>
+
+<div class="row">
+<span>Customers</span>
+<b id="dueCustomers">0</b>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="panel" style="margin-top:14px">
+
+<h2>त्वरित शॉर्टकट</h2>
+
+<div class="quick">
+
+<button class="btn" onclick="openCustomer()">
+👤➕<br>ग्राहक जोड़ें
+</button>
+
+<button class="btn" onclick="openDelivery()">
+🚚<br>डेली एंट्री
+</button>
+
+<button class="btn" onclick="openMonthly()">
+🗓️<br>मंथली कार्ड
+</button>
+
+<button class="btn" onclick="openBill()">
+🧾<br>मंथली बिल
+</button>
+
+<button class="btn" onclick="openPayment()">
+₹<br>पेमेंट
+</button>
+
+<button class="btn" onclick="renderCustomers()">
+👥<br>ग्राहक सूची
+</button>
+
+</div>
+
+</section>
+
+
+<section class="panel" style="margin-top:14px">
+
+<h2>ग्राहक खोजें</h2>
+
+<input
+placeholder="नाम / मोबाइल / एरिया से खोजें..."
+oninput="searchCustomers(this.value)"
+>
+
+<div id="customerList" style="margin-top:10px"></div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<div class="modal" id="modal">
+
+<div class="box" id="modalBox"></div>
+
+</div>
+
+
 <div class="toast" id="toast"></div>
 
+
 <script>
-const KEY="yw_v3_full"; let db=JSON.parse(localStorage.getItem(KEY)||'{"customers":[],"entries":[],"payments":[]}');
-const save=()=>localStorage.setItem(KEY,JSON.stringify(db));
-const today=()=>new Date().toISOString().slice(0,10);
-document.getElementById("today").textContent=new Date().toLocaleDateString("hi-IN");
-function modal(html){document.getElementById("modalBox").innerHTML=html;document.getElementById("modal").classList.add("show")}
-function closeModal(){document.getElementById("modal").classList.remove("show")}
-function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1800)}
+
+const KEY="yw_v3_full";
+
+let db=JSON.parse(
+localStorage.getItem(KEY) ||
+'{"customers":[],"entries":[],"payments":[]}'
+);
+
+const save=()=>{
+localStorage.setItem(KEY,JSON.stringify(db));
+};
+
+const today=()=>{
+return new Date().toISOString().slice(0,10);
+};
+
+document.getElementById("today").textContent=
+new Date().toLocaleDateString("hi-IN");
+
+
+function modal(html){
+
+document.getElementById("modalBox").innerHTML=html;
+
+document.getElementById("modal").classList.add("show");
+
+}
+
+
+function closeModal(){
+
+document.getElementById("modal").classList.remove("show");
+
+}
+
+
+function toast(t){
+
+let e=document.getElementById("toast");
+
+e.textContent=t;
+
+e.classList.add("show");
+
+setTimeout(()=>{
+e.classList.remove("show");
+},1800);
+
+}
+
+
+/* CUSTOMER */
+
 function openCustomer(){
-modal(`<h2>➕ नया ग्राहक</h2><div class="form">
-<input id="cn" placeholder="ग्राहक का नाम *"><input id="cp" placeholder="मोबाइल नंबर (अनिवार्य नहीं)">
-<input id="ca" class="full" placeholder="पता"><input id="cr" placeholder="Area / Route"><input id="rate" type="number" value="20" placeholder="Jar Rate">
-<label class="full"><input id="dwa" type="checkbox"> Daily WhatsApp Update चाहिए</label></div><br>
-<button class="primary" onclick="saveCustomer()">Save Customer</button> <button onclick="closeModal()">Cancel</button>`)
+
+modal(`
+
+<h2>➕ नया ग्राहक</h2>
+
+<div class="form">
+
+<input id="cn"
+placeholder="ग्राहक का नाम *">
+
+<input id="cp"
+placeholder="मोबाइल नंबर (अनिवार्य नहीं)">
+
+<input id="ca"
+class="full"
+placeholder="पता">
+
+<input id="cr"
+placeholder="Area / Route">
+
+<input id="rate"
+type="number"
+value="20"
+placeholder="Jar Rate">
+
+<label class="full">
+
+<input id="dwa" type="checkbox">
+
+Daily WhatsApp Update चाहिए
+
+</label>
+
+</div>
+
+<br>
+
+<button class="primary"
+onclick="saveCustomer()">
+
+Save Customer
+
+</button>
+
+<button onclick="closeModal()">
+
+Cancel
+
+</button>
+
+`);
+
 }
+
+
 function saveCustomer(){
-let name=cn.value.trim(); if(!name)return alert("ग्राहक का नाम डालें");
-db.customers.push({id:Date.now(),name,phone:cp.value.trim(),address:ca.value.trim(),area:cr.value.trim(),rate:+rate.value||0,dailyWA:dwa.checked});
-save();closeModal();refresh();toast("Customer added");
+
+let name=cn.value.trim();
+
+if(!name){
+
+alert("ग्राहक का नाम डालें");
+
+return;
+
 }
-function renderCustomers(arr=db.customers){
-let el=document.getElementById("customerList");
-if(!arr.length){el.innerHTML='<span class="muted">कोई ग्राहक नहीं है।</span>';return}
-el.innerHTML=arr.map(c=>`<div class="row"><span><b>${c.name}</b><br><span class="small">${c.phone||"Mobile नहीं"} · ${c.area||"Area नहीं"} · Rate ₹${c.rate}</span></span><span class="actions"><button class="btn" onclick="openDelivery(${c.id})">Entry</button><button class="btn" onclick="openMonthly(${c.id})">Card</button><button class="btn" onclick="openBill(${c.id})">Bill</button></span></div>`).join("");
-}
-function searchCustomers(q){q=q.toLowerCase();renderCustomers(db.customers.filter(c=>(c.name+" "+c.phone+" "+c.area).toLowerCase().includes(q)))}
-function customerSelect(selected=""){return `<select id="sel" onchange="onSelectCustomer()"><option value="">Customer चुनें</option>${db.customers.map(c=>`<option value="${c.id}" ${String(c.id)==String(selected)?"selected":""}>${c.name}${c.phone?" - "+c.phone:""}</option>`).join("")}</select>`}
-function onSelectCustomer(){}
-function openDelivery(id=""){
-modal(`<h2>🚚 Daily Delivery Entry</h2>${customerSelect(id)}<div id="entryArea" style="margin-top:12px"></div><br><button class="primary" onclick="saveEntry()">Save Entry</button> <button onclick="closeModal()">Cancel</button>`);
-document.getElementById("sel").onchange=()=>showEntry();
-showEntry();
-}
-function showEntry(){
-let c=db.customers.find(x=>x.id==sel.value);document.getElementById("entryArea").innerHTML=c?`<div class="qty"><button onclick="chg(-1)">−</button><input id="qty" type="number" value="1" min="0"><button onclick="chg(1)">+</button><span>Jar</span></div><p>Rate: ₹${c.rate} | Amount: ₹<span id="amt">${c.rate}</span></p><label><input id="sendDaily" type="checkbox" ${c.dailyWA?"checked":""}> Daily WhatsApp update</label>`:'<span class="muted">Customer चुनें।</span>';
-if(c)qty.oninput=()=>amt.textContent=(+qty.value||0)*c.rate;
-}
-function chg(n){qty.value=Math.max(0,(+qty.value||0)+n);qty.oninput()}
-function saveEntry(){
-let c=db.customers.find(x=>x.id==sel.value);if(!c)return alert("Customer चुनें");let q=+qty.value||0;if(q<1)return alert("Jar quantity डालें");
-let e={id:Date.now(),customerId:c.id,date:today(),qty:q,rate:c.rate,amount:q*c.rate};db.entries.push(e);save();let send=document.getElementById("sendDaily").checked;
-closeModal();refresh();toast("Delivery saved");
-if(send && c.phone) whatsapp(c.phone,`नमस्ते ${c.name}, आज आपकी डिलीवरी ${q} जार की हुई। कुल राशि ₹${e.amount}। धन्यवाद - Yaduwanshi Child Water`);
-else if(send && !c.phone) alert("इस customer का mobile number उपलब्ध नहीं है।");
-}
-function month(){return new Date().toISOString().slice(0,7)}
-function customerTotals(c,mo=month()){
-let es=db.entries.filter(e=>e.customerId===c.id&&e.date.startsWith(mo));let paid=db.payments.filter(p=>p.customerId===c.id&&p.date.startsWith(mo)).reduce((a,p)=>a+p.amount,0);let jars=es.reduce((a,e)=>a+e.qty,0),amt=es.reduce((a,e)=>a+e.amount,0);return {es,paid,jars,amt,due:Math.max(0,amt-paid)}
-}
-function openMonthly(id=""){
-modal(`<h2>🗓️ Customer Monthly Card</h2>${customerSelect(id)}<div id="monthArea" style="margin-top:12px"></div><br><button onclick="closeModal()">Close</button>`);
-sel.onchange=showMonthly;showMonthly();
-}
-function showMonthly(){
-let c=db.customers.find(x=>x.id==sel.value);if(!c){monthArea.innerHTML='<span class="muted">Customer चुनें।</span>';return}
-let t=customerTotals(c);monthArea.innerHTML=`<div class="row"><span>Month</span><b>${month()}</b></div><div class="row"><span>Total Jars</span><b>${t.jars}</b></div><div class="row"><span>Total Amount</span><b>₹${t.amt}</b></div><div class="row"><span>Paid</span><b>₹${t.paid}</b></div><div class="row"><span>Outstanding</span><b>₹${t.due}</b></div><h3>तारीखवार Consumption</h3>${t.es.length?t.es.map(e=>`<div class="row"><span>${e.date}</span><span class="qty"><button onclick="adjustEntry(${e.id},-1)">−</button><b>${e.qty}</b><button onclick="adjustEntry(${e.id},1)">+</button></span></div>`).join(""):"कोई entry नहीं"}<br><button class="success" onclick="openBill(${c.id})">Monthly Bill</button>`;
-}
-function adjustEntry(id,n){let e=db.entries.find(x=>x.id===id);if(!e)return;e.qty=Math.max(0,e.qty+n);e.amount=e.qty*e.rate;if(e.qty===0)db.entries=db.entries.filter(x=>x.id!==id);save();showMonthly();refresh()}
-function openBill(id=""){
-modal(`<h2>🧾 Monthly Bill</h2>${customerSelect(id)}<div id="billArea" style="margin-top:12px"></div><br><button onclick="closeModal()">Close</button>`);
-sel.onchange=showBill;showBill();
-}
-function showBill(){
-let c=db.customers.find(x=>x.id==sel.value);if(!c){billArea.innerHTML='<span class="muted">Customer चुनें।</span>';return}
-let t=customerTotals(c);billArea.innerHTML=`<div class="bill" id="printBill"><h2>Yaduwanshi Child Water</h2><p><b>Customer:</b> ${c.name}</p><p><b>Month:</b> ${month()}</p><p><b>Total Jars:</b> ${t.jars}</p><p><b>Rate:</b> ₹${c.rate}</p><p><b>Total Amount:</b> ₹${t.amt}</p><p><b>Paid:</b> ₹${t.paid}</p><p><b>Outstanding:</b> ₹${t.due}</p></div><br><div class="actions"><button class="primary" onclick="printBill()">Print / PDF</button><button class="success" onclick="sendBill(${c.id})">WhatsApp Bill</button></div>`;
-}
-function sendBill(id){let c=db.customers.find(x=>x.id==id),t=customerTotals(c);if(!c.phone)return alert("इस customer का mobile number उपलब्ध नहीं है।");whatsapp(c.phone,`Yaduwanshi Child Water - Monthly Bill%0ACustomer: ${c.name}%0AMonth: ${month()}%0ATotal Jars: ${t.jars}%0ARate: ₹${c.rate}%0ATotal Amount: ₹${t.amt}%0APaid: ₹${t.paid}%0AOutstanding: ₹${t.due}`)}
-function whatsapp(phone,msg){let p=phone.replace(/\D/g,"");if(p.length===10)p="91"+p;window.open("https://wa.me/"+p+"?text="+encodeURIComponent(msg),"_blank")}
-function printBill(){let w=window.open("","_blank");w.document.write("<html><head><title>Monthly Bill</title></head><body>"+document.getElementById("printBill").outerHTML+"<script>window.print()<\/script></body></html>");w.document.close()}
-function openPayment(){
-modal(`<h2>₹ Payment Entry</h2>${customerSelect()}<div class="form" style="margin-top:12px"><input id="pay" type="number" placeholder="Payment Amount"><input id="pdate" type="date" value="${today()}"></div><br><button class="primary" onclick="savePayment()">Save Payment</button> <button onclick="closeModal()">Cancel</button>`)
-}
-function savePayment(){let c=db.customers.find(x=>x.id==sel.value),a=+pay.value||0;if(!c||a<=0)return alert("Customer और amount डालें");db.payments.push({id:Date.now(),customerId:c.id,amount:a,date:pdate.value});save();closeModal();refresh();toast("Payment saved")}
-function refresh(){
-let tj=db.entries.filter(e=>e.date===today()).reduce((a,e)=>a+e.qty,0),tc=db.payments.filter(p=>p.date===today()).reduce((a,p)=>a+p.amount,0),paid=db.payments.reduce((a,p)=>a+p.amount,0);
-let due=db.customers.reduce((a,c)=>a+customerTotals(c).due,0);
-customerCount.textContent=db.customers.length;todayJars.textContent=tj;sumJars.textContent=tj+" जार";todayCollection.textContent=tc;c2.textContent=tc;allPaid.textContent=paid;totalDue.textContent=due;d2.textContent=due;dueCustomers.textContent=db.customers.filter(c=>customerTotals(c).due>0).length;waCount.textContent=db.customers.filter(c=>c.dailyWA).length;stock.textContent="—";renderCustomers();
-}
+
+
+db.customers.push({
+
+id:Date.now(),
+
+name:name,
+
+phone:cp.value.trim(),
+
+address:ca.value.trim(),
+
+area:cr.value.trim(),
+
+rate:+rate.value||0,
+
+dailyWA:dwa.checked
+
+});
+
+
+save();
+
+closeModal();
+
 refresh();
+
+toast("Customer added");
+
+}
+
+
+function renderCustomers(arr=db.customers){
+
+let el=document.getElementById("customerList");
+
+if(!arr.length){
+
+el.innerHTML=
+'<span class="muted">कोई ग्राहक नहीं है।</span>';
+
+return;
+
+}
+
+
+el.innerHTML=arr.map(c=>`
+
+<div class="row">
+
+<span>
+
+<b>${c.name}</b>
+
+<br>
+
+<span class="small">
+
+${c.phone||"Mobile नहीं"}
+·
+${c.area||"Area नहीं"}
+·
+Rate ₹${c.rate}
+
+</span>
+
+</span>
+
+
+<span class="actions">
+
+<button class="btn"
+onclick="openDelivery(${c.id})">
+
+Entry
+
+</button>
+
+<button class="btn"
+onclick="openMonthly(${c.id})">
+
+Card
+
+</button>
+
+<button class="btn"
+onclick="openBill(${c.id})">
+
+Bill
+
+</button>
+
+</span>
+
+</div>
+
+`).join("");
+
+}
+
+
+function searchCustomers(q){
+
+q=q.toLowerCase();
+
+renderCustomers(
+
+db.customers.filter(c=>
+
+(c.name+" "+c.phone+" "+c.area)
+.toLowerCase()
+.includes(q)
+
+)
+
+);
+
+}
+
+
+/* CUSTOMER SELECT */
+
+function customerSelect(selected=""){
+
+return `
+
+<select id="sel">
+
+<option value="">
+Customer चुनें
+</option>
+
+${db.customers.map(c=>`
+
+<option
+value="${c.id}"
+${String(c.id)==String(selected)?"selected":""}
+>
+
+${c.name}
+
+${c.phone?" - "+c.phone:""}
+
+</option>
+
+`).join("")}
+
+</select>
+
+`;
+
+}
+
+
+/* DAILY DELIVERY */
+
+function openDelivery(id=""){
+
+modal(`
+
+<h2>🚚 Daily Delivery Entry</h2>
+
+${customerSelect(id)}
+
+<div id="entryArea"
+style="margin-top:12px">
+</div>
+
+<br>
+
+<button class="primary"
+onclick="saveEntry()">
+
+Save Entry
+
+</button>
+
+<button onclick="closeModal()">
+
+Cancel
+
+</button>
+
+`);
+
+document.getElementById("sel").onchange=
+()=>showEntry();
+
+showEntry();
+
+}
+
+
+function showEntry(){
+
+let c=db.customers.find(
+x=>x.id==sel.value
+);
+
+
+document.getElementById("entryArea").innerHTML=
+
+c?
+
+`
+
+<div class="qty">
+
+<button onclick="chg(-1)">
+−
+</button>
+
+<input
+id="qty"
+type="number"
+value="1"
+min="0"
+>
+
+<button onclick="chg(1)">
++
+</button>
+
+<span>Jar</span>
+
+</div>
+
+
+<p>
+
+Rate: ₹${c.rate}
+
+|
+
+Amount: ₹
+
+<span id="amt">
+${c.rate}
+</span>
+
+</p>
+
+
+<label>
+
+<input
+id="sendDaily"
+type="checkbox"
+${c.dailyWA?"checked":""}
+>
+
+Daily WhatsApp update
+
+</label>
+
+`
+
+:
+
+'<span class="muted">Customer चुनें।</span>';
+
+
+if(c){
+
+qty.oninput=()=>{
+
+amt.textContent=
+(+qty.value||0)*c.rate;
+
+};
+
+}
+
+}
+
+
+function chg(n){
+
+qty.value=
+Math.max(
+0,
+(+qty.value||0)+n
+);
+
+qty.oninput();
+
+}
+
+
+function saveEntry(){
+
+let c=db.customers.find(
+x=>x.id==sel.value
+);
+
+if(!c){
+
+alert("Customer चुनें");
+
+return;
+
+}
+
+
+let q=+qty.value||0;
+
+
+if(q<1){
+
+alert("Jar quantity डालें");
+
+return;
+
+}
+
+
+let e={
+
+id:Date.now(),
+
+customerId:c.id,
+
+date:today(),
+
+qty:q,
+
+rate:c.rate,
+
+amount:q*c.rate
+
+};
+
+
+db.entries.push(e);
+
+save();
+
+
+let send=
+document.getElementById("sendDaily").checked;
+
+
+closeModal();
+
+refresh();
+
+toast("Delivery saved");
+
+
+if(send && c.phone){
+
+whatsapp(
+
+c.phone,
+
+`नमस्ते ${c.name}, आज आपकी डिलीवरी ${q} जार की हुई। कुल राशि ₹${e.amount}। धन्यवाद - Yaduwanshi Child Water`
+
+);
+
+}
+
+else if(send && !c.phone){
+
+alert(
+"इस customer का mobile number उपलब्ध नहीं है।"
+);
+
+}
+
+}
+
+
+/* MONTH */
+
+function month(){
+
+return new Date()
+.toISOString()
+.slice(0,7);
+
+}
+
+
+function customerTotals(c,mo=month()){
+
+let es=db.entries.filter(
+
+e=>
+
+e.customerId===c.id &&
+e.date.startsWith(mo)
+
+);
+
+
+let paid=
+db.payments
+.filter(
+
+p=>
+
+p.customerId===c.id &&
+p.date.startsWith(mo)
+
+)
+.reduce(
+(a,p)=>a+p.amount,
+0
+);
+
+
+let jars=
+es.reduce(
+(a,e)=>a+e.qty,
+0
+);
+
+
+let amt=
+es.reduce(
+(a,e)=>a+e.amount,
+0
+);
+
+
+return{
+
+es,
+
+paid,
+
+jars,
+
+amt,
+
+due:Math.max(
+0,
+amt-paid
+)
+
+};
+
+}
+
+
+/* MONTHLY CARD */
+
+function openMonthly(id=""){
+
+modal(`
+
+<h2>🗓️ Customer Monthly Card</h2>
+
+${customerSelect(id)}
+
+<div id="monthArea"
+style="margin-top:12px">
+</div>
+
+<br>
+
+<button onclick="closeModal()">
+Close
+</button>
+
+`);
+
+sel.onchange=showMonthly;
+
+showMonthly();
+
+}
+
+
+function showMonthly(){
+
+let c=db.customers.find(
+x=>x.id==sel.value
+);
+
+
+if(!c){
+
+monthArea.innerHTML=
+'<span class="muted">Customer चुनें।</span>';
+
+return;
+
+}
+
+
+let t=customerTotals(c);
+
+
+monthArea.innerHTML=
+
+`
+
+<div class="row">
+
+<span>Month</span>
+
+<b>${month()}</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Total Jars</span>
+
+<b>${t.jars}</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Total Amount</span>
+
+<b>₹${t.amt}</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Paid</span>
+
+<b>₹${t.paid}</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Outstanding</span>
+
+<b>₹${t.due}</b>
+
+</div>
+
+
+<h3>
+तारीखवार Consumption
+</h3>
+
+
+${
+
+t.es.length
+
+?
+
+t.es.map(e=>`
+
+<div class="row">
+
+<span>${e.date}</span>
+
+<span class="qty">
+
+<button onclick="adjustEntry(${e.id},-1)">
+−
+</button>
+
+<b>${e.qty}</b>
+
+<button onclick="adjustEntry(${e.id},1)">
++
+</button>
+
+</span>
+
+</div>
+
+`).join("")
+
+:
+
+"कोई entry नहीं"
+
+}
+
+
+<br>
+
+<button class="success"
+onclick="openBill(${c.id})">
+
+Monthly Bill
+
+</button>
+
+`;
+
+}
+
+
+function adjustEntry(id,n){
+
+let e=db.entries.find(
+x=>x.id===id
+);
+
+if(!e)return;
+
+
+e.qty=Math.max(
+0,
+e.qty+n
+);
+
+e.amount=e.qty*e.rate;
+
+
+if(e.qty===0){
+
+db.entries=
+db.entries.filter(
+x=>x.id!==id
+);
+
+}
+
+
+save();
+
+showMonthly();
+
+refresh();
+
+}
+
+
+/* MONTHLY BILL */
+
+function openBill(id=""){
+
+modal(`
+
+<h2>🧾 Monthly Bill</h2>
+
+${customerSelect(id)}
+
+<div id="billArea"
+style="margin-top:12px">
+</div>
+
+<br>
+
+<button onclick="closeModal()">
+Close
+</button>
+
+`);
+
+sel.onchange=showBill;
+
+showBill();
+
+}
+
+
+function showBill(){
+
+let c=db.customers.find(
+x=>x.id==sel.value
+);
+
+
+if(!c){
+
+billArea.innerHTML=
+'<span class="muted">Customer चुनें।</span>';
+
+return;
+
+}
+
+
+let t=customerTotals(c);
+
+
+billArea.innerHTML=
+
+`
+
+<div class="bill"
+id="printBill">
+
+<h2>
+Yaduwanshi Child Water
+</h2>
+
+
+<p>
+<b>Customer:</b>
+${c.name}
+</p>
+
+
+<p>
+<b>Month:</b>
+${month()}
+</p>
+
+
+<p>
+<b>Total Jars:</b>
+${t.jars}
+</p>
+
+
+<p>
+<b>Rate:</b>
+₹${c.rate}
+</p>
+
+
+<p>
+<b>Total Amount:</b>
+₹${t.amt}
+</p>
+
+
+<p>
+<b>Paid:</b>
+₹${t.paid}
+</p>
+
+
+<p>
+<b>Outstanding:</b>
+₹${t.due}
+</p>
+
+</div>
+
+
+<br>
+
+
+<div class="actions">
+
+<button
+class="primary"
+onclick="printBill()">
+
+Print / PDF
+
+</button>
+
+
+<button
+class="success"
+onclick="sendBill(${c.id})">
+
+WhatsApp Bill
+
+</button>
+
+</div>
+
+`;
+
+}
+
+
+/* WHATSAPP BILL */
+
+function sendBill(id){
+
+let c=db.customers.find(
+x=>x.id==id
+);
+
+let t=customerTotals(c);
+
+
+if(!c.phone){
+
+alert(
+"इस customer का mobile number उपलब्ध नहीं है।"
+);
+
+return;
+
+}
+
+
+whatsapp(
+
+c.phone,
+
+`Yaduwanshi Child Water - Monthly Bill
+Customer: ${c.name}
+Month: ${month()}
+Total Jars: ${t.jars}
+Rate: ₹${c.rate}
+Total Amount: ₹${t.amt}
+Paid: ₹${t.paid}
+Outstanding: ₹${t.due}`
+
+);
+
+}
+
+
+/* WHATSAPP */
+
+function whatsapp(phone,msg){
+
+let p=phone.replace(
+/\D/g,
+""
+);
+
+
+if(p.length===10){
+
+p="91"+p;
+
+}
+
+
+window.open(
+
+"https://wa.me/"+p+
+"?text="+
+encodeURIComponent(msg),
+
+"_blank"
+
+);
+
+}
+
+
+/* PRINT */
+
+function printBill(){
+
+let w=window.open(
+"",
+"_blank"
+);
+
+
+w.document.write(
+
+"<html><head><title>Monthly Bill</title></head><body>"+
+
+document.getElementById("printBill").outerHTML+
+
+"<script>window.print()<\/script>"+
+
+"</body></html>"
+
+);
+
+
+w.document.close();
+
+}
+
+
+/* PAYMENT */
+
+function openPayment(){
+
+modal(`
+
+<h2>₹ Payment Entry</h2>
+
+${customerSelect()}
+
+<div
+class="form"
+style="margin-top:12px">
+
+<input
+id="pay"
+type="number"
+placeholder="Payment Amount"
+>
+
+<input
+id="pdate"
+type="date"
+value="${today()}"
+>
+
+</div>
+
+<br>
+
+<button
+class="primary"
+onclick="savePayment()">
+
+Save Payment
+
+</button>
+
+<button onclick="closeModal()">
+
+Cancel
+
+</button>
+
+`);
+
+}
+
+
+function savePayment(){
+
+let c=db.customers.find(
+x=>x.id==sel.value
+);
+
+
+let a=+pay.value||0;
+
+
+if(!c || a<=0){
+
+alert(
+"Customer और amount डालें"
+);
+
+return;
+
+}
+
+
+db.payments.push({
+
+id:Date.now(),
+
+customerId:c.id,
+
+amount:a,
+
+date:pdate.value
+
+});
+
+
+save();
+
+closeModal();
+
+refresh();
+
+toast("Payment saved");
+
+}
+
+
+/* DASHBOARD */
+
+function refresh(){
+
+let tj=
+
+db.entries
+
+.filter(
+e=>e.date===today()
+)
+
+.reduce(
+(a,e)=>a+e.qty,
+0
+);
+
+
+let tc=
+
+db.payments
+
+.filter(
+p=>p.date===today()
+)
+
+.reduce(
+(a,p)=>a+p.amount,
+0
+);
+
+
+let paid=
+
+db.payments
+
+.reduce(
+(a,p)=>a+p.amount,
+0
+);
+
+
+let due=
+
+db.customers
+
+.reduce(
+(a,c)=>a+customerTotals(c).due,
+0
+);
+
+
+customerCount.textContent=
+db.customers.length;
+
+
+todayJars.textContent=
+tj;
+
+
+sumJars.textContent=
+tj+" जार";
+
+
+todayCollection.textContent=
+tc;
+
+
+c2.textContent=
+tc;
+
+
+allPaid.textContent=
+paid;
+
+
+totalDue.textContent=
+due;
+
+
+d2.textContent=
+due;
+
+
+dueCustomers.textContent=
+
+db.customers.filter(
+c=>customerTotals(c).due>0
+).length;
+
+
+waCount.textContent=
+
+db.customers.filter(
+c=>c.dailyWA
+).length;
+
+
+stock.textContent="—";
+
+
+renderCustomers();
+
+}
+
+
+refresh();
+
 </script>
-</body></html>
+
+</body>
+</html>
